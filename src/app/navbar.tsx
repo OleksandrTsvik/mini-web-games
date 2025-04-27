@@ -1,6 +1,7 @@
-import { Moon, Sun } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import ThemeToggle from './theme-toggle';
 
 import logo from '@/assets/logo.svg';
 
@@ -14,13 +15,7 @@ export default function Navbar() {
           </Link>
           <div aria-hidden="true" className="-ml-4 flex-1" />
           <div className="flex items-center gap-3">
-            <button
-              className="flex items-center rounded-lg p-2 text-base/6 font-medium text-zinc-950 dark:text-white hover:bg-zinc-500 dark:hover:bg-zinc-900 cursor-pointer"
-              type="button"
-            >
-              <Moon size={24} />
-              <Sun size={24} />
-            </button>
+            <ThemeToggle />
           </div>
         </nav>
       </div>
