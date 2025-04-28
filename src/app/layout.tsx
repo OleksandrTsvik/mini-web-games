@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 
-import Footer from './footer';
-import Navbar from './navbar';
+import Footer from './_components/footer/footer';
+import Main from './_components/main/main';
+import Navbar from './_components/navbar/navbar';
 import Providers from './providers';
 
 import './globals.css';
@@ -15,15 +16,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className="bg-white lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="bg-white lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950"
+      suppressHydrationWarning
+    >
       <body className="flex min-h-svh w-full flex-col">
         <Providers>
           <Navbar />
-          <main className="flex flex-1 flex-col lg:px-2">
-            <div className="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
-              <div className="mx-auto max-w-6xl">{children}</div>
-            </div>
-          </main>
+          <Main>{children}</Main>
           <Footer />
         </Providers>
       </body>
