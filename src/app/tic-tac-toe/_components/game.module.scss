@@ -1,0 +1,20 @@
+.board {
+  &__status {
+    @apply flex items-center;
+
+    margin-bottom: 1rem;
+  }
+
+  &__row {
+  }
+
+  &__square {
+    @apply inline-flex items-center justify-center cursor-pointer;
+
+    width: 40px;
+    height: 40px;
+    background: #000;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+}

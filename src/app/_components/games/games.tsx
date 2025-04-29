@@ -1,0 +1,23 @@
+import GameCard from './game-card';
+
+import logo from '@/assets/logo.svg';
+
+const GAME_LIST = [
+  { title: 'Tic-Tac-Toe', href: '/tic-tac-toe', src: logo },
+  { title: 'Tic tac toe', href: '/tic-tac-toe', src: logo },
+];
+
+export default function Games() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 xl:gap-x-8 gap-y-10">
+      {GAME_LIST.map(({ href, src, title }, index) => (
+        <GameCard
+          key={index}
+          href={href}
+          src={src}
+          title={title}
+        />
+      ))}
+    </div>
+  );
+}

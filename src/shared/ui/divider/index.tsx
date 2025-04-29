@@ -5,7 +5,7 @@ type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLHRElement>, HTMLHR
 export default function Divider({ className, ...props }: Props) {
   return (
     <hr
-      className={classnames('w-full border-t border-zinc-950/10 dark:border-white/10', className)}
+      className={classnames('w-full border-t border-zinc-950/10 dark:border-white/10 my-6', className)}
       {...props}
     />
   );

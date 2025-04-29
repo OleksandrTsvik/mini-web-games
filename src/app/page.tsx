@@ -1,12 +1,14 @@
 import Divider from '@/shared/ui/divider';
+import Heading from '@/shared/ui/heading';
 
-export default async function Home() {
-  await new Promise((resolve) => setTimeout(resolve, 4_000));
+import Games from './_components/games/games';
 
+export default function HomePage() {
   return (
     <>
-      <h1 className="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Mini web games</h1>
-      <Divider className="mt-6" />
+      <Heading>Mini web games</Heading>
+      <Divider />
+      <Games />
     </>
   );
 }
