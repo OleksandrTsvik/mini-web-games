@@ -1,6 +1,8 @@
+import { Nullable } from '../types';
+
 import { isString } from './type-guards';
 
-type ClassName = string | Record<string, boolean> | null | undefined;
+type ClassName = Nullable<string | Record<string, Nullable<boolean>>>;
 
 export function classnames(...classNames: ClassName[]): string {
   const classes: string[] = [];

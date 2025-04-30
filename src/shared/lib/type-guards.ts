@@ -1,3 +1,7 @@
+export function isNonNullable<T>(value: T): value is NonNullable<T> {
+  return value !== null && value !== undefined;
+}
+
 export function isNumber(value: unknown): value is number {
   return typeof value === 'number';
 }
@@ -7,7 +11,7 @@ export function isString(value: unknown): value is string {
 }
 
 export function isObject(value: unknown): value is object {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+  return isNonNullable(value) && typeof value === 'object' && !Array.isArray(value);
 }
 
 export function isArrayOfStrings(value: unknown): value is string[] {

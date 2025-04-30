@@ -2,6 +2,7 @@ import { classnames } from '@/shared/lib/class-names';
 
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> & {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span';
+  color?: 'default' | 'primary' | 'success';
 };
 
 function sizeMap(component: Props['as']): string {
@@ -21,13 +22,26 @@ function sizeMap(component: Props['as']): string {
   }
 }
 
-export default function Heading({ as = 'h1', className, children, ...props }: Props) {
+function colorMap(component: Props['color']): string {
+  switch (component) {
+    case 'primary':
+      return 'text-blue-500';
+    case 'success':
+      return 'text-green-500';
+    default:
+      return 'text-zinc-950 dark:text-white';
+  }
+}
+
+export default function Heading({ as = 'h1', color, className, children, ...props }: Props) {
   const Component = as;
-  const size = sizeMap(as);
+
+  const sizeClassNames = sizeMap(as);
+  const colorClassNames = colorMap(color);
 
   return (
     <Component
-      className={classnames(size, 'font-semibold text-zinc-950 dark:text-white', className)}
+      className={classnames(sizeClassNames, colorClassNames, 'font-semibold', className)}
       {...props}
     >
       {children}

@@ -5,12 +5,5 @@ type Props = {
 };
 
 export default function ResetButton({ onClick }: Props) {
-  return (
-    <Button
-      className="mt-5"
-      onClick={onClick}
-    >
-      Reset
-    </Button>
-  );
+  return <Button onClick={onClick}>Спочатку</Button>;
 }

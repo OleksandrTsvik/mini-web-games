@@ -1,20 +1,31 @@
 .board {
+  @apply mx-auto grid grid-cols-3 overflow-auto;
+
+  gap: 10px;
+  max-width: 400px;
+
   &__status {
-    @apply flex items-center;
+    @apply text-center;
 
     margin-bottom: 1rem;
-  }
 
-  &__row {
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
 
   &__square {
-    @apply inline-flex items-center justify-center cursor-pointer;
+    @apply flex items-center justify-center;
 
-    width: 40px;
-    height: 40px;
-    background: #000;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    min-width: 40px;
+    padding: 1rem;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
