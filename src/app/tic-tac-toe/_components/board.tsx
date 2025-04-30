@@ -1,6 +1,6 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { SquareState } from '../_types/square-type';
+import { SquareState } from '../_types/game';
 
 import Square from './square';
 
@@ -20,6 +20,7 @@ export default function Board({ winner, squares, winnerSequence, onSquareClick }
         <Square
           key={index}
           value={square}
+          winner={winner}
           isWinner={winnerSequence?.includes(index)}
           disabled={isNonNullable(square) || isNonNullable(winner)}
           onClick={() => onSquareClick(index)}

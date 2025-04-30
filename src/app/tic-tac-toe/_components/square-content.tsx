@@ -1,24 +1,15 @@
 import { IconWeight } from '@phosphor-icons/react';
 import { Circle, X } from '@phosphor-icons/react/dist/ssr';
 
-import { SquareType } from '../_types/square-type';
+import { Player } from '../_types/game';
 
 type Props = {
-  value: SquareType;
+  player: Player;
   size?: number;
   weigth?: IconWeight;
+  className?: string;
 };
 
-export default function SquareContent({ value, size, weigth }: Props) {
-  return value === SquareType.X ? (
-    <X
-      size={size}
-      weight={weigth}
-    />
-  ) : (
-    <Circle
-      size={size}
-      weight={weigth}
-    />
-  );
+export default function SquareContent({ player: value, ...props }: Props) {
+  return value === Player.X ? <X {...props} /> : <Circle {...props} />;
 }

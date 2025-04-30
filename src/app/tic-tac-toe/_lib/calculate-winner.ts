@@ -1,6 +1,6 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { SquareState } from '../_types/square-type';
+import { SquareState } from '../_types/game';
 
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
@@ -13,24 +13,24 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6],
 ];
 
-export function calculateWinner(squares: SquareState[]): {
-  winner: SquareState | null;
+export function calculateWinner(board: SquareState[]): {
+  winner?: SquareState;
   winnerSequence?: number[];
   isDraw: boolean;
 } {
   for (let i = 0; i < WINNING_COMBINATIONS.length; i++) {
     const [a, b, c] = WINNING_COMBINATIONS[i];
 
-    if (isNonNullable(squares[a]) && squares[a] === squares[b] && squares[a] === squares[c]) {
+    if (isNonNullable(board[a]) && board[a] === board[b] && board[a] === board[c]) {
       return {
-        winner: squares[a],
+        winner: board[a],
         winnerSequence: WINNING_COMBINATIONS[i],
         isDraw: false,
       };
     }
   }
 
-  const isDraw = squares.every((square) => isNonNullable(square));
+  const isDraw = board.every((square) => isNonNullable(square));
 
-  return { winner: null, isDraw };
+  return { isDraw };
 }

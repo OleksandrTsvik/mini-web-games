@@ -1,6 +1,6 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { SquareState, SquareType } from '../_types/square-type';
+import { Player, SquareState } from '../_types/game';
 
 import SquareContent from './square-content';
 
@@ -9,18 +9,19 @@ import styles from './game.module.scss';
 type Props = {
   winner: SquareState;
   isDraw: boolean;
-  currentMove: SquareType;
+  currentPlayer: Player;
 };
 
-export default function Status({ winner, isDraw, currentMove }: Props) {
+export default function Status({ winner, isDraw, currentPlayer }: Props) {
   if (isNonNullable(winner)) {
     return (
       <div className={styles.board__status}>
         Переможець:&nbsp;
         <SquareContent
-          value={winner}
+          player={winner}
           size={18}
           weigth="bold"
+          className={winner === Player.X ? 'text-blue-500' : 'text-red-500'}
         />
       </div>
     );
@@ -34,7 +35,7 @@ export default function Status({ winner, isDraw, currentMove }: Props) {
     <div className={styles.board__status}>
       Хід:&nbsp;
       <SquareContent
-        value={currentMove}
+        player={currentPlayer}
         size={18}
         weigth="bold"
       />

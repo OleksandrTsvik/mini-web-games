@@ -1,15 +1,16 @@
 import { useState } from 'react';
 
-import { isNonNullable } from '@/shared/lib/type-guards';
+import { isNonNullable, isNone } from '@/shared/lib/type-guards';
 
 import { calculateWinner } from '../_lib/calculate-winner';
-import { SquareState, SquareType } from '../_types/square-type';
+import { getNextPlayer } from '../_lib/utils';
+import { BotFunc, Player, SquareState } from '../_types/game';
 
-const INIT_CURRENT_MOVE = SquareType.X;
+const INIT_CURRENT_PLAYER = Player.X;
 const INIT_SQUARES = Array(9).fill(null);
 
-export default function useGameState() {
-  const [currentMove, setCurrentMove] = useState(INIT_CURRENT_MOVE);
+export default function useGameState(bot?: BotFunc) {
+  const [currentPlayer, setCurrentPlayer] = useState(INIT_CURRENT_PLAYER);
   const [squares, setSquares] = useState<SquareState[]>(INIT_SQUARES);
 
   const { winner, winnerSequence, isDraw } = calculateWinner(squares);
@@ -19,22 +20,31 @@ export default function useGameState() {
       return;
     }
 
+    const nextPlayer = getNextPlayer(currentPlayer);
     const nextSquares = squares.slice();
 
-    if (currentMove === SquareType.X) {
-      nextSquares[index] = SquareType.X;
-    } else {
-      nextSquares[index] = SquareType.O;
+    nextSquares[index] = currentPlayer;
+
+    if (!bot) {
+      setCurrentPlayer(nextPlayer);
+      setSquares(nextSquares);
+      return;
     }
 
-    setCurrentMove(currentMove === SquareType.X ? SquareType.O : SquareType.X);
+    const result = calculateWinner(nextSquares);
+
+    if (isNone(result.winner) && !result.isDraw) {
+      const botIndex = bot(nextSquares, nextPlayer);
+      nextSquares[botIndex] = nextPlayer;
+    }
+
     setSquares(nextSquares);
   };
 
   const handleReset = () => {
-    setCurrentMove(INIT_CURRENT_MOVE);
+    setCurrentPlayer(INIT_CURRENT_PLAYER);
     setSquares(INIT_SQUARES);
   };
 
-  return { squares, currentMove, winner, winnerSequence, isDraw, handleSquareClick, handleReset };
+  return { squares, currentPlayer, winner, winnerSequence, isDraw, handleSquareClick, handleReset };
 }
