@@ -1,6 +1,8 @@
 import { CaretLeft } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
 
+import Button from '@/shared/ui/button';
+
 export default function RootNotFoundPage() {
   return (
     <div className="text-center">
@@ -14,13 +16,13 @@ export default function RootNotFoundPage() {
         Неправильно набрано адресу або такої сторінки на сайті не існує.
       </p>
       <div className="mt-10 flex items-center justify-center gap-x-6">
-        <Link
+        <Button
+          component={Link}
           href="/"
-          className="px-3.5 py-2.5 inline-flex items-center justify-center gap-x-2 rounded-lg border text-base/6 font-semibold border-transparent bg-zinc-900 dark:bg-zinc-600 text-white dark:text-white hover:bg-zinc-800 dark:hover:bg-zinc-700"
         >
           <CaretLeft weight="bold" />
           Перейти на головну сторінку
-        </Link>
+        </Button>
       </div>
     </div>
   );
