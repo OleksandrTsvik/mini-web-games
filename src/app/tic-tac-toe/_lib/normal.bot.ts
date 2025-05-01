@@ -5,7 +5,7 @@ import { emptySquareIndexes, getNextPlayer } from './utils';
 
 const PRIORITY_SQUARES = [4, 0, 2, 6, 8, 1, 3, 5, 7];
 
-export const mediumBot: BotFunc = (board, botPlayer) => {
+export const normalBot: BotFunc = (board, botPlayer) => {
   const availableSquareIndexes = emptySquareIndexes(board);
 
   const botWinningSquareIndex = getWinningSquareIndex(board, availableSquareIndexes, botPlayer);

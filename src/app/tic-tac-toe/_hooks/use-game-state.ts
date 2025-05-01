@@ -3,16 +3,17 @@ import { useState } from 'react';
 import { isNonNullable, isNone } from '@/shared/lib/type-guards';
 
 import { calculateWinner } from '../_lib/calculate-winner';
-import { getNextPlayer } from '../_lib/utils';
-import { BotFunc, Player, SquareState } from '../_types/game.types';
+import { getBotByLevel, getNextPlayer } from '../_lib/utils';
+import { BotLevel, Player, SquareState } from '../_types/game.types';
 
 const INIT_CURRENT_PLAYER = Player.X;
 const INIT_SQUARES = Array(9).fill(null);
 
-export default function useGameState(bot?: BotFunc) {
+export default function useGameState(botLevel?: BotLevel) {
   const [currentPlayer, setCurrentPlayer] = useState(INIT_CURRENT_PLAYER);
   const [squares, setSquares] = useState<SquareState[]>(INIT_SQUARES);
 
+  const bot = getBotByLevel(botLevel);
   const { winner, winnerSequence, isDraw } = calculateWinner(squares);
 
   const handleSquareClick = (index: number) => {

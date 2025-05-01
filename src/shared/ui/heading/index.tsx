@@ -2,7 +2,7 @@ import { classnames } from '@/shared/lib/class-names';
 
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> & {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span';
-  color?: 'default' | 'primary' | 'success';
+  color?: 'default' | 'blue' | 'green' | 'amber';
 };
 
 function sizeMap(component: Props['as']): string {
@@ -24,10 +24,12 @@ function sizeMap(component: Props['as']): string {
 
 function colorMap(component: Props['color']): string {
   switch (component) {
-    case 'primary':
+    case 'blue':
       return 'text-blue-500';
-    case 'success':
+    case 'green':
       return 'text-green-500';
+    case 'amber':
+      return 'text-amber-500';
     default:
       return 'text-zinc-950 dark:text-white';
   }
