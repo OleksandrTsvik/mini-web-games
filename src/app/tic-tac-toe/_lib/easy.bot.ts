@@ -1,11 +1,24 @@
-import { BotFunc } from '../_types/game';
+import { getRandomElement } from '@/shared/lib/random.utils';
 
-import { emptySquares } from './utils';
+import { BotFunc } from '../_types/game.types';
 
-export const easyBot: BotFunc = (board) => {
-  const availableSpots = emptySquares(board);
+import { calculateWinner } from './calculate-winner';
+import { emptySquareIndexes } from './utils';
 
-  // TODO: random
+export const easyBot: BotFunc = (board, botPlayer) => {
+  const availableSquareIndexes = emptySquareIndexes(board);
 
-  return availableSpots[0];
+  for (let i = 0; i < availableSquareIndexes.length; i++) {
+    const availableIndex = availableSquareIndexes[i];
+    board[availableIndex] = botPlayer;
+
+    const { winner } = calculateWinner(board);
+    board[availableIndex] = null;
+
+    if (winner === botPlayer) {
+      return availableIndex;
+    }
+  }
+
+  return getRandomElement(availableSquareIndexes);
 };

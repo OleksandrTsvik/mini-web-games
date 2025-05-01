@@ -1,7 +1,7 @@
 import { classnames } from '@/shared/lib/class-names';
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { Player, SquareState } from '../_types/game';
+import { Player, SquareState } from '../_types/game.types';
 
 import SquareContent from './square-content';
 

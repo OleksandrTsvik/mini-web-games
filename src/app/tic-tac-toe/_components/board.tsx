@@ -1,6 +1,6 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { SquareState } from '../_types/game';
+import { SquareState } from '../_types/game.types';
 
 import Square from './square';
 

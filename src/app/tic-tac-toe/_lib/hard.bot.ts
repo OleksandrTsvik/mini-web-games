@@ -1,17 +1,17 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { BotFunc, Player, SquareState } from '../_types/game';
+import { BotFunc, Player, SquareState } from '../_types/game.types';
 
 import { calculateWinner } from './calculate-winner';
-import { emptySquares, getNextPlayer } from './utils';
+import { emptySquareIndexes, getNextPlayer } from './utils';
 
 type MinimaxResult = { score: number; index?: number };
 
-export const hardBot: BotFunc = (board, player) => {
-  return minmax(board, player).index ?? -1;
+export const hardBot: BotFunc = (board, botPlayer) => {
+  return minimax(board, botPlayer).index ?? -1;
 };
 
-function minmax(board: SquareState[], currentPlayer: Player, secondPlayer?: Player): MinimaxResult {
+function minimax(board: SquareState[], currentPlayer: Player, secondPlayer?: Player): MinimaxResult {
   const { winner } = calculateWinner(board);
 
   if (isNonNullable(winner) && winner !== currentPlayer) {
@@ -22,21 +22,21 @@ function minmax(board: SquareState[], currentPlayer: Player, secondPlayer?: Play
     return { score: 10 };
   }
 
-  const availableSpots = emptySquares(board);
+  const availableSquareIndexes = emptySquareIndexes(board);
 
-  if (availableSpots.length === 0) {
+  if (availableSquareIndexes.length === 0) {
     return { score: 0 };
   }
 
   const player = secondPlayer ?? currentPlayer;
   const moves: MinimaxResult[] = [];
 
-  for (let i = 0; i < availableSpots.length; i++) {
-    const availableIndex = availableSpots[i];
+  for (let i = 0; i < availableSquareIndexes.length; i++) {
+    const availableIndex = availableSquareIndexes[i];
     board[availableIndex] = player;
 
     const nextPlayer = getNextPlayer(player);
-    const score = minmax(board, currentPlayer, nextPlayer).score;
+    const score = minimax(board, currentPlayer, nextPlayer).score;
 
     const move: MinimaxResult = { score, index: availableIndex };
     board[availableIndex] = null;
