@@ -6,28 +6,15 @@ type Props = {
   level: BotLevel | undefined;
 };
 
-export default function BotLevelBadge({ level }: Props) {
-  let color: BadgeColor;
-  let content: string;
+const levelConfig: Record<BotLevel | 'default', { color: BadgeColor; content: string }> = {
+  easy: { color: 'lime', content: 'easy' },
+  normal: { color: 'amber', content: 'normal' },
+  hard: { color: 'red', content: 'hard' },
+  default: { color: 'blue', content: '1 vs 1' },
+};
 
-  switch (level) {
-    case 'easy':
-      color = 'lime';
-      content = 'easy';
-      break;
-    case 'normal':
-      color = 'amber';
-      content = 'normal';
-      break;
-    case 'hard':
-      color = 'red';
-      content = 'hard';
-      break;
-    default:
-      color = 'blue';
-      content = '1 vs 1';
-      break;
-  }
+export default function BotLevelBadge({ level }: Props) {
+  const { color, content } = levelConfig[level ?? 'default'];
 
   return (
     <Badge
