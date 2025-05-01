@@ -8,6 +8,7 @@ import Heading from '@/shared/ui/heading';
 
 import { ROUTING } from '../routing';
 
+import BotLevelBadge from './_components/bot-level.badge';
 import Game from './_components/game';
 import { BotLevel } from './_types/game.types';
 
@@ -28,12 +29,16 @@ export default async function TicTacToePage({ searchParams }: Props) {
   return (
     <>
       <div className="flex items-center justify-between gap-2 flex-wrap">
-        <Heading>Tic-Tac-Toe</Heading>
+        <Heading className="relative">
+          Tic-Tac-Toe
+          <BotLevelBadge level={level} />
+        </Heading>
         <Button
           component={Link}
           href={ROUTING.TIC_TAC_TOE_SETTINGS}
+          icon
         >
-          <Gear size={20} />
+          <Gear size={18} />
         </Button>
       </div>
       <Divider />
