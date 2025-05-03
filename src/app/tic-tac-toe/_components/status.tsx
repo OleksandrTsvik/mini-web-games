@@ -2,7 +2,7 @@ import { isNonNullable } from '@/shared/lib/type-guards';
 
 import { Player, SquareState } from '../_types/game.types';
 
-import SquareContent from './square-content';
+import GameSymbol from './game-symbol';
 
 import styles from './game.module.scss';
 
@@ -17,7 +17,7 @@ export default function Status({ winner, isDraw, currentPlayer }: Props) {
     return (
       <div className={styles.board__status}>
         Переможець:&nbsp;
-        <SquareContent
+        <GameSymbol
           player={winner}
           size={18}
           weigth="bold"
@@ -34,7 +34,7 @@ export default function Status({ winner, isDraw, currentPlayer }: Props) {
   return (
     <div className={styles.board__status}>
       Хід:&nbsp;
-      <SquareContent
+      <GameSymbol
         player={currentPlayer}
         size={18}
         weigth="bold"

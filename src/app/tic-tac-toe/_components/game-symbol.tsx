@@ -10,6 +10,6 @@ type Props = {
   className?: string;
 };
 
-export default function SquareContent({ player: value, ...props }: Props) {
+export default function GameSymbol({ player: value, ...props }: Props) {
   return value === Player.X ? <X {...props} /> : <Circle {...props} />;
 }

@@ -3,7 +3,7 @@ import { isNonNullable } from '@/shared/lib/type-guards';
 
 import { Player, SquareState } from '../_types/game.types';
 
-import SquareContent from './square-content';
+import GameSymbol from './game-symbol';
 
 import styles from './game.module.scss';
 
@@ -26,7 +26,7 @@ export default function Square({ value, winner, isWinner, disabled, onClick }: P
       disabled={disabled}
       onClick={onClick}
     >
-      {isNonNullable(value) && <SquareContent player={value} />}
+      {isNonNullable(value) && <GameSymbol player={value} />}
     </button>
   );
 }

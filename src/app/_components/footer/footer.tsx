@@ -15,7 +15,7 @@ export default function Footer() {
             screenReader="Linkedin"
           />
           <SocialLink
-            href="https://github.com/OleksandrTsvik"
+            href="https://github.com/OleksandrTsvik/mini-web-games"
             icon={<GithubLogo size={24} />}
             screenReader="Github"
           />
