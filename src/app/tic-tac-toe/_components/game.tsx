@@ -4,7 +4,7 @@ import useGameState from '../_hooks/use-game-state';
 import { BotLevel } from '../_types/game.types';
 
 import Board from './board';
-import ResetButton from './reset-button';
+import ResetButton from './reset.button';
 import Status from './status';
 
 type Props = {

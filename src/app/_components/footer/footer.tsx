@@ -1,6 +1,6 @@
 import { EnvelopeSimple, GithubLogo, LinkedinLogo } from '@phosphor-icons/react/dist/ssr';
 
-import SocialLink from './social-link';
+import SocialLink from './social.link';
 
 export default function Footer() {
   const email = 'oleksandr.zwick@gmail.com';

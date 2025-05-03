@@ -1,6 +1,6 @@
 import { ROUTING } from '@/app/routing';
 
-import GameCard from './game-card';
+import GameCard from './game.card';
 
 import logo from '@/assets/logo.svg';
 
