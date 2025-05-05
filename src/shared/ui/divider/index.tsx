@@ -1,11 +1,21 @@
 import { classnames } from '@/shared/lib/class-names';
 
-type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLHRElement>, HTMLHRElement>;
+type DividerType = 'horizontal' | 'vertical';
 
-export default function Divider({ className, ...props }: Props) {
+type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLHRElement>, HTMLHRElement> & {
+  type?: DividerType;
+};
+
+const typeMap: Record<DividerType, string> = {
+  horizontal: 'w-px bg-zinc-950/10 dark:bg-white/10',
+  vertical: 'w-full border-t border-zinc-950/10 dark:border-white/10 my-6',
+};
+
+export default function Divider({ type = 'vertical', className, ...props }: Props) {
   return (
-    <hr
-      className={classnames('w-full border-t border-zinc-950/10 dark:border-white/10 my-6', className)}
+    <div
+      className={classnames(typeMap[type], className)}
+      role="separator"
       {...props}
     />
   );

@@ -43,9 +43,9 @@ export default function Button<T extends React.ElementType = 'button'>({
   return (
     <Component
       className={classnames(
-        'inline-flex items-center text-center gap-x-2 font-semibold text-base/6 sm:text-sm/6 align-middle select-none cursor-pointer shadow-sm hover:shadow-md disabled:shadow-none disabled:opacity-50 disabled:cursor-not-allowed focus:shadow-none border rounded-lg border-zinc-300 hover:border-zinc-300/80 dark:border-white/5 dark:hover:border-white/10',
+        'inline-flex items-center text-center gap-x-2 font-semibold align-middle select-none cursor-pointer shadow-sm hover:shadow-md disabled:shadow-none disabled:opacity-50 disabled:cursor-not-allowed focus:shadow-none border rounded-lg border-zinc-300 hover:border-zinc-300/80 dark:border-white/5 dark:hover:border-white/10',
         {
-          'px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)]':
+          'text-base/6 sm:text-sm/6 px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)]':
             !icon,
           'p-2.5 sm:p-2': icon,
         },

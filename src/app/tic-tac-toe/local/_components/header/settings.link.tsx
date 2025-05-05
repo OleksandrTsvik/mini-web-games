@@ -14,7 +14,7 @@ export function SettingsLink({ href }: Props) {
       href={href}
       icon
     >
-      <Faders size={18} />
+      <Faders size={20} />
     </Button>
   );
 }

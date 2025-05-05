@@ -4,29 +4,42 @@ import { ROUTING } from '@/app/routing';
 import { isNonNullable } from '@/shared/lib/type-guards';
 
 import { useGameState } from '../_hooks/use-game-state';
+import { BotLevel } from '../game.types';
 
 import { GameSquare } from './game-square';
 import { GameStatus } from './game-status';
 import { GameLayout } from './game.layout';
 import { GameTitle } from './header/game.title';
+import { HumanSelector } from './header/human-selector';
 import { SettingsLink } from './header/settings.link';
 import { RestartButton } from './restart.button';
 
 type Props = {
-  botLevel?: string;
+  botLevel?: BotLevel;
 };
 
 export function Game({ botLevel }: Props) {
-  const { squares, currentPlayer, winner, winnerSequence, isDraw, handleSquareClick, handleRestart } =
-    useGameState(botLevel);
+  const {
+    humanPlayer,
+    squares,
+    currentPlayer,
+    winner,
+    winnerSequence,
+    isDraw,
+    handleHumanPlayerChange,
+    handleSquareClick,
+    handleRestart,
+  } = useGameState(botLevel);
 
   return (
     <GameLayout
       header={<GameTitle botLevel={botLevel} />}
-      headerActions={
-        <>
-          <SettingsLink href={ROUTING.TIC_TAC_TOE} />
-        </>
+      settingsLink={<SettingsLink href={ROUTING.TIC_TAC_TOE} />}
+      humanSelector={
+        <HumanSelector
+          humanPlayer={humanPlayer}
+          onClick={handleHumanPlayerChange}
+        />
       }
       status={
         <GameStatus
@@ -35,7 +48,7 @@ export function Game({ botLevel }: Props) {
           currentPlayer={currentPlayer}
         />
       }
-      squares={squares.map((square, index) => (
+      board={squares.map((square, index) => (
         <GameSquare
           key={index}
           value={square}
