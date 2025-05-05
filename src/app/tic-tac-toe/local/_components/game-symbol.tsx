@@ -3,7 +3,7 @@ import { Circle, X } from '@phosphor-icons/react/dist/ssr';
 
 import { classnames } from '@/shared/lib/class-names';
 
-import { Player } from '../_types/game.types';
+import { Player } from '../game.types';
 
 type Props = {
   player: Player;

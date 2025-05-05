@@ -1,11 +1,9 @@
 import Heading from '@/shared/ui/heading';
 
-import { BotLevel } from '../../_types/game.types';
-
 import { BotLevelBadge } from './bot-level.badge';
 
 type Props = {
-  botLevel?: BotLevel;
+  botLevel?: string;
 };
 
 export function GameTitle({ botLevel }: Props) {

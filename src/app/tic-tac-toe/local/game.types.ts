@@ -7,6 +7,4 @@ export enum Player {
 
 export type SquareState = Nullable<Player>;
 
-export type BotLevel = 'easy' | 'normal' | 'hard';
-
 export type BotFunc = (board: SquareState[], botPlayer: Player) => number;

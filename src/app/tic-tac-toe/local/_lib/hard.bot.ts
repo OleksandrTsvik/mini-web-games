@@ -1,6 +1,6 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { BotFunc, Player, SquareState } from '../_types/game.types';
+import { BotFunc, Player, SquareState } from '../game.types';
 
 import { calculateWinner } from './calculate-winner';
 import { emptySquareIndexes, getNextPlayer } from './utils';

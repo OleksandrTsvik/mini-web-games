@@ -1,6 +1,7 @@
 import { isNone } from '@/shared/lib/type-guards';
 
-import { BotFunc, BotLevel, Player, SquareState } from '../_types/game.types';
+import { BOT_LEVEL } from '../game.constants';
+import { BotFunc, Player, SquareState } from '../game.types';
 
 import { easyBot } from './easy.bot';
 import { hardBot } from './hard.bot';
@@ -14,13 +15,13 @@ export function emptySquareIndexes(board: SquareState[]): number[] {
   return board.reduce<number[]>((indexes, square, index) => (isNone(square) ? indexes.concat(index) : indexes), []);
 }
 
-export function getBotByLevel(botLevel?: BotLevel): BotFunc | undefined {
+export function getBotByLevel(botLevel?: string): BotFunc | undefined {
   switch (botLevel?.trim().toLowerCase()) {
-    case 'easy':
+    case BOT_LEVEL.EASY:
       return easyBot;
-    case 'normal':
+    case BOT_LEVEL.NORMAL:
       return normalBot;
-    case 'hard':
+    case BOT_LEVEL.HARD:
       return hardBot;
     default:
       return;

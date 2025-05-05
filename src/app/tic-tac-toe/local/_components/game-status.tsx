@@ -1,6 +1,6 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { Player } from '../_types/game.types';
+import { Player } from '../game.types';
 
 import { GameSymbol } from './game-symbol';
 

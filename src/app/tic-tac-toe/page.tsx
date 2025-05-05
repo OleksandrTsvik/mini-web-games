@@ -7,6 +7,8 @@ import Button from '@/shared/ui/button';
 import Divider from '@/shared/ui/divider';
 import Heading from '@/shared/ui/heading';
 
+import { BOT_LEVEL } from './local/game.constants';
+
 export const metadata: Metadata = {
   title: 'Tic-Tac-Toe',
   description: 'Select the difficulty level for the Tic-Tac-Toe game.',
@@ -41,21 +43,21 @@ export default function TicTacToePage() {
       <div className="flex flex-col gap-4 max-w-[400px] mx-auto">
         <Button
           component={Link}
-          href={ROUTING.TIC_TAC_TOE_LOCAL('easy')}
+          href={ROUTING.TIC_TAC_TOE_LOCAL(BOT_LEVEL.EASY)}
           color="green"
         >
           Легкий
         </Button>
         <Button
           component={Link}
-          href={ROUTING.TIC_TAC_TOE_LOCAL('normal')}
+          href={ROUTING.TIC_TAC_TOE_LOCAL(BOT_LEVEL.NORMAL)}
           color="amber"
         >
           Нормальний
         </Button>
         <Button
           component={Link}
-          href={ROUTING.TIC_TAC_TOE_LOCAL('hard')}
+          href={ROUTING.TIC_TAC_TOE_LOCAL(BOT_LEVEL.HARD)}
           justify="justify-between"
           color="red"
         >

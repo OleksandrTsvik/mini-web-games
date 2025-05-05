@@ -1,6 +1,6 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { Player, SquareState } from '../_types/game.types';
+import { Player, SquareState } from '../game.types';
 
 const WINNING_COMBINATIONS = [
   [0, 1, 2],

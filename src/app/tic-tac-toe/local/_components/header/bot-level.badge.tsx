@@ -1,15 +1,15 @@
 import Badge, { BadgeColor } from '@/shared/ui/badge';
 
-import { BotLevel } from '../../_types/game.types';
+import { BOT_LEVEL } from '../../game.constants';
 
 type Props = {
-  level: BotLevel | undefined;
+  level: string | undefined;
 };
 
-const levelConfig: Record<BotLevel | 'default', { color: BadgeColor; content: string }> = {
-  easy: { color: 'lime', content: 'easy' },
-  normal: { color: 'amber', content: 'normal' },
-  hard: { color: 'red', content: 'hard' },
+const levelConfig: Record<string, { color: BadgeColor; content: string }> = {
+  [BOT_LEVEL.EASY]: { color: 'lime', content: 'easy' },
+  [BOT_LEVEL.NORMAL]: { color: 'amber', content: 'normal' },
+  [BOT_LEVEL.HARD]: { color: 'red', content: 'hard' },
   default: { color: 'blue', content: '1 vs 1' },
 };
 

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 
 import { Game } from './_components';
-import { BotLevel } from './_types/game.types';
 
-type SearchParams = Promise<{ level?: BotLevel }>;
+type SearchParams = Promise<{ level?: string }>;
 
 type Props = {
   searchParams: SearchParams;
@@ -17,5 +16,5 @@ export const metadata: Metadata = {
 export default async function TicTacToeLocalPage({ searchParams }: Props) {
   const { level } = await searchParams;
 
-  return <Game botLevel={level} />;
+  return <Game botLevel={level?.trim().toLowerCase()} />;
 }

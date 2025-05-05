@@ -4,7 +4,6 @@ import { ROUTING } from '@/app/routing';
 import { isNonNullable } from '@/shared/lib/type-guards';
 
 import { useGameState } from '../_hooks/use-game-state';
-import { BotLevel } from '../_types/game.types';
 
 import { GameSquare } from './game-square';
 import { GameStatus } from './game-status';
@@ -14,7 +13,7 @@ import { SettingsLink } from './header/settings.link';
 import { RestartButton } from './restart.button';
 
 type Props = {
-  botLevel?: BotLevel;
+  botLevel?: string;
 };
 
 export function Game({ botLevel }: Props) {

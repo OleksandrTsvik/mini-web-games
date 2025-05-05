@@ -1,6 +1,6 @@
 import { getRandomElement } from '@/shared/lib/random.utils';
 
-import { BotFunc } from '../_types/game.types';
+import { BotFunc } from '../game.types';
 
 import { calculateWinner } from './calculate-winner';
 import { emptySquareIndexes } from './utils';
