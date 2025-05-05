@@ -26,7 +26,7 @@ export function Game({ botLevel }: Props) {
       header={<GameTitle botLevel={botLevel} />}
       headerActions={
         <>
-          <SettingsLink href={ROUTING.TIC_TAC_TOE_SETTINGS} />
+          <SettingsLink href={ROUTING.TIC_TAC_TOE} />
         </>
       }
       status={
