@@ -1,6 +1,6 @@
 import Badge, { BadgeColor } from '@/shared/ui/badge';
 
-import { BotLevel } from '../_types/game.types';
+import { BotLevel } from '../../_types/game.types';
 
 type Props = {
   level: BotLevel | undefined;
@@ -13,7 +13,7 @@ const levelConfig: Record<BotLevel | 'default', { color: BadgeColor; content: st
   default: { color: 'blue', content: '1 vs 1' },
 };
 
-export default function BotLevelBadge({ level }: Props) {
+export function BotLevelBadge({ level }: Props) {
   const { color, content } = levelConfig[level ?? 'default'];
 
   return (

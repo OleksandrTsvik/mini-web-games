@@ -4,6 +4,6 @@ type Props = {
   onClick: () => void;
 };
 
-export default function ResetButton({ onClick }: Props) {
+export function RestartButton({ onClick }: Props) {
   return <Button onClick={onClick}>Спочатку</Button>;
 }

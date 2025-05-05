@@ -1,6 +1,6 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { SquareState } from '../_types/game.types';
+import { Player, SquareState } from '../_types/game.types';
 
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
@@ -14,7 +14,7 @@ const WINNING_COMBINATIONS = [
 ];
 
 export function calculateWinner(board: SquareState[]): {
-  winner?: SquareState;
+  winner?: Player;
   winnerSequence?: number[];
   isDraw: boolean;
 } {

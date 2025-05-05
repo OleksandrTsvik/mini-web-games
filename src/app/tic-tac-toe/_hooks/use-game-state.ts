@@ -9,7 +9,7 @@ import { BotLevel, Player, SquareState } from '../_types/game.types';
 const INIT_CURRENT_PLAYER = Player.X;
 const INIT_SQUARES = Array(9).fill(null);
 
-export default function useGameState(botLevel?: BotLevel) {
+export function useGameState(botLevel?: BotLevel) {
   const [currentPlayer, setCurrentPlayer] = useState(INIT_CURRENT_PLAYER);
   const [squares, setSquares] = useState<SquareState[]>(INIT_SQUARES);
 
@@ -42,10 +42,10 @@ export default function useGameState(botLevel?: BotLevel) {
     setSquares(nextSquares);
   };
 
-  const handleReset = () => {
+  const handleRestart = () => {
     setCurrentPlayer(INIT_CURRENT_PLAYER);
     setSquares(INIT_SQUARES);
   };
 
-  return { squares, currentPlayer, winner, winnerSequence, isDraw, handleSquareClick, handleReset };
+  return { squares, currentPlayer, winner, winnerSequence, isDraw, handleSquareClick, handleRestart };
 }
