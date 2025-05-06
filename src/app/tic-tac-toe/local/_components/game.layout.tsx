@@ -18,10 +18,12 @@ export function GameLayout({ header, settingsLink, humanSelector, status, board,
         {header}
         <div className="flex items-center gap-2">
           {humanSelector}
-          <Divider
-            className="h-6"
-            type="horizontal"
-          />
+          {humanSelector && (
+            <Divider
+              className="h-6"
+              type="horizontal"
+            />
+          )}
           {settingsLink}
         </div>
       </div>

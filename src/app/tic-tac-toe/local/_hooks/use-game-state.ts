@@ -69,6 +69,7 @@ export function useGameState(botLevel?: BotLevel) {
 
   return {
     humanPlayer,
+    botPlayer,
     squares,
     currentPlayer,
     winner,

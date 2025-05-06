@@ -21,6 +21,7 @@ type Props = {
 export function Game({ botLevel }: Props) {
   const {
     humanPlayer,
+    botPlayer,
     squares,
     currentPlayer,
     winner,
@@ -36,10 +37,12 @@ export function Game({ botLevel }: Props) {
       header={<GameTitle botLevel={botLevel} />}
       settingsLink={<SettingsLink href={ROUTING.TIC_TAC_TOE} />}
       humanSelector={
-        <HumanSelector
-          humanPlayer={humanPlayer}
-          onClick={handleHumanPlayerChange}
-        />
+        isNonNullable(botPlayer) ? (
+          <HumanSelector
+            humanPlayer={humanPlayer}
+            onClick={handleHumanPlayerChange}
+          />
+        ) : null
       }
       status={
         <GameStatus
