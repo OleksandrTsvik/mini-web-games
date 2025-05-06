@@ -23,7 +23,7 @@ export default function GameCard({ href, src, title }: Props) {
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20"></div>
       <div className="absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-3 group-hover:scale-110">
-        <h3 className="font-serif text-2xl font-bold text-white shadow-xl">{title}</h3>
+        <h3 className="font-serif text-2xl font-bold text-white">{title}</h3>
       </div>
     </Link>
   );
