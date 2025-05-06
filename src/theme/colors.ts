@@ -1,4 +1,4 @@
-export type TailwindColor =
+export type Color =
   | 'amber'
   | 'blue'
   | 'cyan'

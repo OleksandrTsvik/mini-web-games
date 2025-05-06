@@ -1,7 +1,7 @@
 import { classnames } from '@/shared/lib/class-names';
-import { TailwindColor } from '@/tailwind/tailwind.types';
+import { Color } from '@/theme';
 
-export type BadgeColor = Exclude<TailwindColor, 'white'>;
+export type BadgeColor = Exclude<Color, 'white'>;
 
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & {
   color?: BadgeColor;

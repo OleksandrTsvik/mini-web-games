@@ -1,14 +1,14 @@
 import { classnames } from '@/shared/lib/class-names';
-import { TailwindColor } from '@/tailwind/tailwind.types';
+import { Color } from '@/theme';
 
 type Props<T extends React.ElementType> = React.ComponentPropsWithRef<T> & {
   component?: T;
   icon?: boolean;
-  color?: TailwindColor;
+  color?: Color;
   justify?: 'justify-start' | 'justify-end' | 'justify-center' | 'justify-between' | 'justify-around';
 };
 
-const colorMap: Record<TailwindColor, string> = {
+const colorMap: Record<Color, string> = {
   amber: 'text-amber-950 bg-amber-500 hover:bg-amber-400 dark:bg-amber-400 dark:hover:bg-amber-400/85',
   blue: 'text-white bg-blue-700 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-600/85',
   cyan: 'text-cyan-950 bg-cyan-400 hover:bg-cyan-300 dark:bg-cyan-300 dark:hover:bg-cyan-300/85',
@@ -50,7 +50,7 @@ export default function Button<T extends React.ElementType = 'button'>({
           'p-2.5 sm:p-2': icon,
         },
         justify,
-        colorMap[color as TailwindColor],
+        colorMap[color as Color],
         className,
       )}
       {...props}
