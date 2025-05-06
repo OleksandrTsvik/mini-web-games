@@ -1,47 +1,34 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 
 import { isNonNullable } from '@/shared/lib/type-guards';
 
 import { calculateWinner } from '../_lib/calculate-winner';
 import { getBotByLevel, getNextPlayer } from '../_lib/utils';
-import { BotLevel, Player, SquareState } from '../game.types';
+import { BOT_MOVE_DELAY_MS } from '../game.constants';
+import { BotLevel, Player } from '../game.types';
 
-const INIT_CURRENT_PLAYER = Player.X;
-const INIT_SQUARES = Array(9).fill(null);
+import { GAME_ACTIONS, INIT_GAME_STATE, gameReducer } from './game-reducer';
 
 export function useGameState(botLevel?: BotLevel) {
-  const [humanPlayer, setHumanPlayer] = useState(INIT_CURRENT_PLAYER);
-  const [currentPlayer, setCurrentPlayer] = useState(INIT_CURRENT_PLAYER);
-  const [squares, setSquares] = useState<SquareState[]>(INIT_SQUARES);
+  const [{ humanPlayer, currentPlayer, squares }, dispatch] = useReducer(gameReducer, INIT_GAME_STATE);
 
   const bot = getBotByLevel(botLevel);
   const botPlayer = bot ? getNextPlayer(humanPlayer) : null;
 
   const { winner, winnerSequence, isDraw } = calculateWinner(squares);
 
-  const handleRestart = () => {
-    setCurrentPlayer(INIT_CURRENT_PLAYER);
-    setSquares(INIT_SQUARES);
-  };
+  const handleRestart = () => dispatch({ type: GAME_ACTIONS.RESTART });
 
-  const handleHumanPlayerChange = (player: Player) => {
-    setHumanPlayer(player);
-    handleRestart();
-  };
+  const handleHumanPlayerChange = (player: Player) =>
+    dispatch({ type: GAME_ACTIONS.SET_HUMAN_PLAYER, payload: player });
 
   const handleMove = useCallback(
-    (player: Player, index: number) => {
+    (index: number) => {
       if (isNonNullable(winner) || isNonNullable(squares[index]) || isDraw) {
         return;
       }
 
-      const nextPlayer = getNextPlayer(player);
-      const nextSquares = squares.slice();
-
-      nextSquares[index] = player;
-
-      setCurrentPlayer(nextPlayer);
-      setSquares(nextSquares);
+      dispatch({ type: GAME_ACTIONS.MOVE, payload: { index } });
     },
     [isDraw, squares, winner],
   );
@@ -51,7 +38,7 @@ export function useGameState(botLevel?: BotLevel) {
       return;
     }
 
-    handleMove(currentPlayer, index);
+    handleMove(index);
   };
 
   useEffect(() => {
@@ -61,8 +48,8 @@ export function useGameState(botLevel?: BotLevel) {
 
     const timeout = setTimeout(() => {
       const botIndex = bot(squares, botPlayer);
-      handleMove(botPlayer, botIndex);
-    }, 400);
+      handleMove(botIndex);
+    }, BOT_MOVE_DELAY_MS);
 
     return () => clearTimeout(timeout);
   }, [bot, botPlayer, currentPlayer, handleMove, squares]);

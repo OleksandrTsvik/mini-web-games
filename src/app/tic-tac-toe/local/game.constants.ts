@@ -3,3 +3,5 @@ export const BOT_LEVEL = {
   NORMAL: 'normal',
   HARD: 'hard',
 } as const;
+
+export const BOT_MOVE_DELAY_MS = 400;

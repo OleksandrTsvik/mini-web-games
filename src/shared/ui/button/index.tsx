@@ -26,7 +26,7 @@ const colorMap: Record<Color, string> = {
   violet: 'text-white bg-violet-600 hover:bg-violet-500 dark:bg-violet-500 dark:hover:bg-violet-500/85',
   white: 'text-zinc-950 bg-white hover:bg-white/85',
   yellow: 'text-yellow-950 bg-yellow-400 hover:bg-yellow-300 dark:bg-yellow-300 dark:hover:bg-yellow-300/85',
-  zinc: 'text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-700 dark:hover:bg-zinc-700/85',
+  zinc: 'text-white bg-zinc-800 hover:bg-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-700/85',
 };
 
 export default function Button<T extends React.ElementType = 'button'>({
