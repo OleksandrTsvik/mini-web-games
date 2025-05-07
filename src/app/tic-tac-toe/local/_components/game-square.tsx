@@ -21,7 +21,7 @@ export function GameSquare({ value, isWinner, disabled, onClick }: Props) {
         styles.board__square,
         'rounded-md cursor-pointer disabled:cursor-default disabled:hover:opacity-60',
         {
-          'bg-zinc-200 dark:bg-black hover:bg-zinc-300 dark:hover:bg-zinc-800': !isWinner,
+          'bg-zinc-300 dark:bg-black hover:bg-zinc-400 dark:hover:bg-zinc-800': !isWinner,
           'bg-orange-600/10': isWinner,
         },
       )}

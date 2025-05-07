@@ -6,7 +6,7 @@ import ticTacToe from '@/assets/games/tic-tac-toe.svg';
 
 const GAME_LIST = [
   { title: 'Tic-Tac-Toe', href: ROUTING.TIC_TAC_TOE, src: ticTacToe },
-  // { title: 'Tic tac toe', href: '/tic-tac-toe', src: logo },
+  { title: '15 Puzzle', href: ROUTING.FIFTEEN_PUZZLE, src: ticTacToe },
 ];
 
 export default function Games() {

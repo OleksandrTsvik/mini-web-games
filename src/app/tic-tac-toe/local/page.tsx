@@ -11,7 +11,8 @@ type Props = {
 
 export const metadata: Metadata = {
   title: 'Tic-Tac-Toe',
-  description: 'Tic-Tac-Toe local game',
+  description:
+    'Грайте в класичну гру хрестики-нолики онлайн! Змагайтеся з друзями або штучним інтелектом, розвивайте стратегічне мислення та насолоджуйтесь простим, але захопливим геймплеєм.',
 };
 
 export default async function TicTacToeLocalPage({ searchParams }: Props) {

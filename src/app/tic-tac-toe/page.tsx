@@ -11,7 +11,7 @@ import { BOT_LEVEL } from './local/game.constants';
 
 export const metadata: Metadata = {
   title: 'Tic-Tac-Toe',
-  description: 'Select the difficulty level for the Tic-Tac-Toe game.',
+  description: 'Виберіть рівень складності для гри Хрестики-нулики.',
 };
 
 export default function TicTacToePage() {
