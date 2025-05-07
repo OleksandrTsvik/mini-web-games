@@ -2,12 +2,14 @@ import { classnames } from '@/shared/lib/class-names';
 
 type Props = {
   tile: number;
+  index: number;
   isEmpty: boolean;
   isCorrect: boolean;
   isMovable: boolean;
+  onClick: (index: number) => void;
 };
 
-export function GameCell({ tile, isEmpty, isCorrect, isMovable }: Props) {
+export function GameCell({ tile, index, isEmpty, isCorrect, isMovable, onClick }: Props) {
   return (
     <div
       className={classnames(
@@ -20,6 +22,7 @@ export function GameCell({ tile, isEmpty, isCorrect, isMovable }: Props) {
           'cursor-pointer': isMovable && !isEmpty,
         },
       )}
+      onClick={() => onClick(index)}
     >
       {isEmpty ? null : tile}
     </div>

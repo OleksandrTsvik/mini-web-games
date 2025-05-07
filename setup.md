@@ -9,6 +9,7 @@
   "editor.wordWrap": "on",
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
+  "editor.tabSize": 2,
 
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "terminal.integrated.enablePersistentSessions": false,
