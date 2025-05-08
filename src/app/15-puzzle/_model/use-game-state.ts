@@ -1,6 +1,9 @@
 import { useLayoutEffect, useState } from 'react';
 
+import useKeyboard from '@/hooks/use-keyboard';
+import { handleGameMove } from '@/shared/lib/keyboard.utils';
 import { shuffle } from '@/shared/lib/random.utils';
+import { KeyboardEventCode } from '@/shared/types';
 
 import { GAME_SIZES } from '../game.constants';
 import { GameSize } from '../game.types';
@@ -27,11 +30,24 @@ export function useGameState(initSize: GameSize = 4) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleKeyboardMove = (key: KeyboardEventCode) => {
+    const emptyIndex = tiles.findIndex((tile) => tile === emptyTile);
+
+    handleGameMove(key, {
+      up: () => handleMove(emptyIndex + size),
+      down: () => handleMove(emptyIndex - size),
+      left: () => handleMove(emptyIndex + 1),
+      right: () => handleMove(emptyIndex - 1),
+    });
+  };
+
+  useKeyboard(handleKeyboardMove);
+
   const handleShuffle = () => {
     setTiles(shuffle(tiles));
   };
 
-  const handleCellClick = (index: number) => {
+  const handleMove = (index: number) => {
     if (!movableTileIndexes.includes(index)) {
       return;
     }
@@ -60,7 +76,7 @@ export function useGameState(initSize: GameSize = 4) {
     movableTileIndexes,
     isSolved,
     handleSizeChange,
-    handleCellClick,
+    handleMove,
     handleShuffle,
   };
 }

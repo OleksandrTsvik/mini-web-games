@@ -1,0 +1,25 @@
+import { useEffect } from 'react';
+
+import { KeyboardEventCode } from '@/shared/types';
+
+type KeyboardEventType = 'keydown' | 'keyup';
+
+const DEFAULT_EVENTS: KeyboardEventType[] = ['keydown'];
+
+export default function useKeyboard(handler: (key: KeyboardEventCode) => void, events?: KeyboardEventType[] | null) {
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => {
+      const { code } = event ?? {};
+
+      if (code) {
+        handler(code as KeyboardEventCode);
+      }
+    };
+
+    (events || DEFAULT_EVENTS).forEach((event) => document.addEventListener(event, listener));
+
+    return () => {
+      (events || DEFAULT_EVENTS).forEach((event) => document.removeEventListener(event, listener));
+    };
+  }, [events, handler]);
+}

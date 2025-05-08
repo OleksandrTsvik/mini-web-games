@@ -9,7 +9,7 @@ import { GameLayout } from './game.layout';
 import { ShuffleButton } from './shuffle.button';
 
 export function Game() {
-  const { tiles, size, emptyTile, movableTileIndexes, isSolved, handleSizeChange, handleCellClick, handleShuffle } =
+  const { tiles, size, emptyTile, movableTileIndexes, isSolved, handleSizeChange, handleMove, handleShuffle } =
     useGameState();
 
   return (
@@ -29,7 +29,7 @@ export function Game() {
           isEmpty={tile === emptyTile}
           isCorrect={tile === index + 1}
           isMovable={movableTileIndexes.includes(index)}
-          onClick={handleCellClick}
+          onClick={handleMove}
         />
       ))}
       overlay={<GameOverOverlay isOpen={isSolved} />}
