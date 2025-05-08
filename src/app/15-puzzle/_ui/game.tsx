@@ -9,12 +9,18 @@ import { GameLayout } from './game.layout';
 import { ShuffleButton } from './shuffle.button';
 
 export function Game() {
-  const { tiles, size, emptyTile, movableTileIndexes, isSolved, handleCellClick, handleShuffle } = useGameState();
+  const { tiles, size, emptyTile, movableTileIndexes, isSolved, handleSizeChange, handleCellClick, handleShuffle } =
+    useGameState();
 
   return (
     <GameLayout
       size={size}
-      header={<GameHeader />}
+      header={
+        <GameHeader
+          size={size}
+          onSizeChange={handleSizeChange}
+        />
+      }
       board={tiles.map((tile, index) => (
         <GameCell
           key={index}

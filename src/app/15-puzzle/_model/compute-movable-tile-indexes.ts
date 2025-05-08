@@ -1,4 +1,6 @@
-export function computeMovableTileIndexes(tiles: number[], emptyTile: number, size: number): number[] {
+import { GameSize } from '../game.types';
+
+export function computeMovableTileIndexes(tiles: number[], emptyTile: number, size: GameSize): number[] {
   const movableTileIndexes: number[] = [];
   const emptyIndex = tiles.findIndex((tile) => tile === emptyTile);
 

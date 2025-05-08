@@ -13,8 +13,8 @@ export function GameCell({ tile, index, isEmpty, isCorrect, isMovable, onClick }
   return (
     <div
       className={classnames(
-        'text-stone-900 dark:text-white text-shadow-sm dark:text-shadow-lg leading-none',
-        'flex items-center justify-center min-w-10 aspect-square rounded-md shadow-lg select-none',
+        'text-stone-900 dark:text-white text-shadow-sm dark:text-shadow-lg',
+        'flex items-center justify-center aspect-square rounded-md shadow-lg select-none',
         {
           'bg-amber-500': !isEmpty,
           'bg-gray-900': isEmpty,
