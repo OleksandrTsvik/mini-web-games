@@ -2,11 +2,12 @@ import { ROUTING } from '@/app/routing';
 
 import GameCard from './game.card';
 
+import fifteenPuzzle from '@/assets/games/15-puzzle.svg';
 import ticTacToe from '@/assets/games/tic-tac-toe.svg';
 
 const GAME_LIST = [
   { title: 'Tic-Tac-Toe', href: ROUTING.TIC_TAC_TOE, src: ticTacToe },
-  { title: '15 Puzzle', href: ROUTING.FIFTEEN_PUZZLE, src: ticTacToe },
+  { title: '15 Puzzle', href: ROUTING.FIFTEEN_PUZZLE, src: fifteenPuzzle },
 ];
 
 export default function Games() {
