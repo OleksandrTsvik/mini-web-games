@@ -12,7 +12,7 @@ export function SettingsLink({ href }: Props) {
     <Button
       component={Link}
       href={href}
-      icon
+      variant="icon"
     >
       <Faders size={20} />
     </Button>

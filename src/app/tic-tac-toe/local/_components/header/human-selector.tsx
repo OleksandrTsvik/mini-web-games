@@ -16,7 +16,7 @@ export function HumanSelector({ humanPlayer, onClick }: Props) {
         <Button
           key={player}
           className={classnames({ 'outline-2 outline-blue-500': player === humanPlayer })}
-          icon
+          variant="icon"
           onClick={() => onClick(player)}
         >
           <GameSymbol

@@ -1,11 +1,21 @@
 import { classnames } from '@/shared/lib/class-names';
 import { Color } from '@/theme';
 
+type Variant = 'default' | 'icon' | 'responsive-icon';
+
 type Props<T extends React.ElementType> = React.ComponentPropsWithRef<T> & {
   component?: T;
-  icon?: boolean;
+  icon?: React.ReactNode;
+  variant?: Variant;
   color?: Color;
   justify?: 'justify-start' | 'justify-end' | 'justify-center' | 'justify-between' | 'justify-around';
+};
+
+const variantMap: Record<Variant, string> = {
+  default:
+    'text-base/6 sm:text-sm/6 px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)]',
+  icon: 'p-2.5 sm:p-2',
+  'responsive-icon': 'p-2.5 sm:text-sm/6 sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)]',
 };
 
 const colorMap: Record<Color, string> = {
@@ -32,6 +42,7 @@ const colorMap: Record<Color, string> = {
 export default function Button<T extends React.ElementType = 'button'>({
   component = 'button',
   icon,
+  variant = 'default',
   color = 'zinc',
   justify = 'justify-center',
   className,
@@ -44,18 +55,39 @@ export default function Button<T extends React.ElementType = 'button'>({
     <Component
       className={classnames(
         'inline-flex items-center text-center gap-x-2 font-semibold align-middle select-none cursor-pointer shadow-sm hover:shadow-md disabled:shadow-none disabled:opacity-50 disabled:cursor-not-allowed focus:shadow-none border rounded-lg border-zinc-300/30 hover:border-zinc-300/60 dark:border-white/5 dark:hover:border-white/10',
-        {
-          'text-base/6 sm:text-sm/6 px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)]':
-            !icon,
-          'p-2.5 sm:p-2': icon,
-        },
         justify,
+        variantMap[variant as Variant],
         colorMap[color as Color],
         className,
       )}
       {...props}
     >
-      {children}
+      <ButtonContent
+        variant={variant}
+        icon={icon}
+      >
+        {children}
+      </ButtonContent>
     </Component>
   );
+}
+
+function ButtonContent<T extends React.ElementType = 'button'>({
+  icon,
+  variant,
+  children,
+}: Pick<Props<T>, 'variant' | 'icon' | 'children'>) {
+  switch (variant as Variant) {
+    case 'icon':
+      return icon || children;
+    case 'responsive-icon':
+      return (
+        <>
+          <span className="sm:hidden">{icon}</span>
+          <span className="hidden sm:block">{children}</span>
+        </>
+      );
+  }
+
+  return children;
 }

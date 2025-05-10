@@ -27,8 +27,7 @@ export function useGameState(initSize: GameSize = 4) {
   useLayoutEffect(() => {
     const length = initSize * initSize;
     setTiles(shuffle(Array.from({ length }, (_, index) => index + 1)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [initSize]);
 
   const handleKeyboardMove = (key: KeyboardEventCode) => {
     const emptyIndex = tiles.findIndex((tile) => tile === emptyTile);

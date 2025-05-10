@@ -2,8 +2,13 @@
 
 ## Tic-Tac-Toe
 
+- [Tutorial: Tic-Tac-Toe](https://react.dev/learn/tutorial-tic-tac-toe)
 - [How to make your Tic Tac Toe game unbeatable by using the minimax algorithm](https://www.freecodecamp.org/news/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37)
 
 ## 15 Puzzle
 
-- [15 Puzzle](https://15puzzle.netlify.app/)
+- [15 Puzzle by Shubham Singh](https://15puzzle.netlify.app/)
+
+## 2048
+
+- [2048 by Gabriele Cirulli](https://github.com/gabrielecirulli/2048)

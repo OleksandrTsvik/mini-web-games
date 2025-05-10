@@ -10,9 +10,13 @@ export function getRandomInt(min: number, max: number): number {
 }
 
 export function getRandomElement<TElement>(array: TElement[]): TElement {
-  const randomIndex = Math.floor(Math.random() * array.length);
+  const randomIndex = getRandomIndex(array);
 
   return array[randomIndex];
+}
+
+export function getRandomIndex<TElement>(array: TElement[]): number {
+  return Math.floor(Math.random() * array.length);
 }
 
 /**
