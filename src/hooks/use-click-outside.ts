@@ -7,12 +7,15 @@ const DEFAULT_EVENTS: EventType[] = ['mousedown', 'touchstart'];
 export function useClickOutside<T extends HTMLElement>(handler: () => void, events?: EventType[] | null) {
   const ref = useRef<T>(null);
 
+  const handlerRef = useRef(handler);
+  handlerRef.current = handler;
+
   useEffect(() => {
     const listener = (event: Event) => {
       const { target } = event ?? {};
 
       if (ref.current && target instanceof Node && !ref.current.contains(target)) {
-        handler();
+        handlerRef.current();
       }
     };
 
@@ -21,8 +24,7 @@ export function useClickOutside<T extends HTMLElement>(handler: () => void, even
     return () => {
       (events || DEFAULT_EVENTS).forEach((event) => document.removeEventListener(event, listener));
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref, handler]);
+  }, [events]);
 
   return ref;
 }
