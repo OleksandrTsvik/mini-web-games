@@ -7,6 +7,7 @@ export const KEYBOARD_EVENT_CODE = {
   S: 'KeyS',
   A: 'KeyA',
   D: 'KeyD',
+  R: 'KeyR',
   NUMPAD_8: 'Numpad8',
   NUMPAD_2: 'Numpad2',
   NUMPAD_4: 'Numpad4',

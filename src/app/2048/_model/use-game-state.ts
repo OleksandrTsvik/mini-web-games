@@ -1,31 +1,35 @@
 import { useLayoutEffect, useReducer } from 'react';
 
 import useKeyboard from '@/hooks/use-keyboard';
-import { handleGameMove } from '@/shared/lib/keyboard.utils';
+import { handleGameKeyboardAction } from '@/shared/lib/keyboard.utils';
 import { KeyboardEventCode } from '@/shared/types';
 
-import { GameSize } from '../game.types';
+import { GameMove } from '../game.types';
 
 import { GAME_ACTIONS, gameReducer, initGameState } from './game-reducer';
 
 export function useGameState() {
-  const [{ score, bestScore, tiles }, dispatch] = useReducer(gameReducer, {}, initGameState);
+  const [{ score, bestScore, grid }, dispatch] = useReducer(gameReducer, {}, initGameState);
 
-  const size = Math.sqrt(tiles.length) as GameSize;
+  const size = grid.size;
 
   useLayoutEffect(() => {
     dispatch({ type: GAME_ACTIONS.INIT_TILES });
   }, []);
 
-  const handleKeyboardMove = (key: KeyboardEventCode) => {
-    handleGameMove(key, {
-      up: () => {
-        console.log('UP');
-      },
+  const handleKeyboardAction = (key: KeyboardEventCode) => {
+    handleGameKeyboardAction(key, {
+      up: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.UP }),
+      down: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.DOWN }),
+      left: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.LEFT }),
+      right: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.RIGHT }),
+      restart: () => dispatch({ type: GAME_ACTIONS.RESTART }),
     });
   };
 
-  useKeyboard(handleKeyboardMove);
+  useKeyboard(handleKeyboardAction);
 
-  return { size, score, bestScore, tiles };
+  const handleRestart = () => dispatch({ type: GAME_ACTIONS.RESTART });
+
+  return { size, score, bestScore, grid, handleRestart };
 }

@@ -1,0 +1,60 @@
+@use '@/theme/variables' as *;
+
+.grid {
+  --size: 4;
+  --grid-gap: calc(var(--spacing) * 2);
+  --cell-size: calc((100% - (var(--grid-gap) * (var(--size) - 1))) / var(--size));
+  --cell-radius: var(--radius-md);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--size), minmax(0, 1fr));
+  gap: var(--grid-gap);
+  width: 100%;
+  border-style: solid;
+  border-width: calc(var(--spacing) * 2);
+  border-radius: var(--radius-lg);
+
+  &__cell {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--cell-radius);
+  }
+
+  &__tile {
+    position: absolute;
+    top: calc(var(--y) * (var(--cell-size) + var(--grid-gap)));
+    left: calc(var(--x) * (var(--cell-size) + var(--grid-gap)));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: var(--cell-radius);
+    transition-property: top, left, color, background-color, opacity, transform, scale;
+    transition-duration: 200ms;
+    animation: tile-in 200ms;
+  }
+}
+
+@media (width >= $screen-md) {
+  .grid {
+    --grid-gap: calc(var(--spacing) * 3);
+
+    border-width: calc(var(--spacing) * 4);
+  }
+}
+
+@media (width >= $screen-lg) {
+  .grid {
+    --grid-gap: calc(var(--spacing) * 4);
+
+    border-width: calc(var(--spacing) * 5);
+  }
+}
+
+@keyframes tile-in {
+  0% {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+}

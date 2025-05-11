@@ -1,8 +1,8 @@
 import { Nullable } from '../types';
 
-import { isString } from './type-guards';
+import { isBoolean, isString } from './type-guards';
 
-type ClassName = Nullable<string | Record<string, Nullable<boolean>>>;
+type ClassName = Nullable<string | boolean | Record<string, Nullable<boolean>>>;
 
 export function classnames(...classNames: ClassName[]): string {
   const classes: string[] = [];
@@ -10,7 +10,7 @@ export function classnames(...classNames: ClassName[]): string {
   for (let i = 0; i < classNames.length; i++) {
     const className = classNames[i];
 
-    if (!className) {
+    if (!className || isBoolean(className)) {
       continue;
     }
 

@@ -5,5 +5,5 @@ type Props = {
 };
 
 export function RestartButton({ onClick }: Props) {
-  return <Button onClick={onClick}>Спочатку</Button>;
+  return <Button onClick={onClick}>Нова гра</Button>;
 }

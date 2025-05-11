@@ -1,13 +1,14 @@
 import { KEYBOARD_EVENT_CODE, KeyboardEventCode } from '../types';
 
-export type GameMoveActions = {
+export type GameKeyboardActions = {
   up?: () => void;
   down?: () => void;
   left?: () => void;
   right?: () => void;
+  restart?: () => void;
 };
 
-export function handleGameMove(key: KeyboardEventCode, actions: GameMoveActions): void {
+export function handleGameKeyboardAction(key: KeyboardEventCode, actions: GameKeyboardActions): void {
   switch (key) {
     case KEYBOARD_EVENT_CODE.ARROW_UP:
     case KEYBOARD_EVENT_CODE.W:
@@ -28,6 +29,9 @@ export function handleGameMove(key: KeyboardEventCode, actions: GameMoveActions)
     case KEYBOARD_EVENT_CODE.D:
     case KEYBOARD_EVENT_CODE.NUMPAD_6:
       actions.right?.();
+      break;
+    case KEYBOARD_EVENT_CODE.R:
+      actions.restart?.();
       break;
   }
 }

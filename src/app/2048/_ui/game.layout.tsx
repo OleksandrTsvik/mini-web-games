@@ -7,21 +7,29 @@ import KeyboardArrowsIcon from '@/shared/ui/icons/keyboard-arrows.icon';
 
 import { GameSize } from '../game.types';
 
+import styles from './game.module.scss';
+
 const rubik = Rubik({ weight: '400', subsets: ['cyrillic', 'latin'] });
 
 type Props = {
   size: GameSize;
   score: React.ReactNode;
   restart: React.ReactNode;
-  grid: React.ReactNode;
+  cells: React.ReactNode;
   tiles: React.ReactNode;
 };
 
-const sizeMap: Record<GameSize, string> = {
-  4: 'grid-cols-4 min-w-56 max-w-3/7',
+type GridCSSProperties = React.CSSProperties & {
+  '--size': GameSize;
 };
 
-export function GameLayout({ size, score, restart, grid, tiles }: Props) {
+const sizeMap: Record<GameSize, string> = {
+  4: 'min-w-56 max-w-3/7',
+};
+
+export function GameLayout({ size, score, restart, cells, tiles }: Props) {
+  const gridStyle: GridCSSProperties = { '--size': size };
+
   return (
     <>
       <div className={classnames('flex items-center justify-between gap-2 flex-wrap', rubik.className)}>
@@ -45,12 +53,13 @@ export function GameLayout({ size, score, restart, grid, tiles }: Props) {
       >
         <div
           className={classnames(
-            'relative grid gap-2 md:gap-3 lg:gap-4 w-full p-2 sm:p-4 md:p-5 rounded-lg',
-            'bg-neutral-500 dark:bg-neutral-800',
+            styles.grid,
+            'bg-neutral-500 dark:bg-neutral-800 border-neutral-500 dark:border-neutral-800',
             sizeMap[size],
           )}
+          style={gridStyle}
         >
-          {grid}
+          {cells}
           {tiles}
         </div>
       </div>

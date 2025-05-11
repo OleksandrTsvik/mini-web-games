@@ -5,7 +5,7 @@ import Main from './_components/main/main';
 import Navbar from './_components/navbar/navbar';
 import Providers from './providers';
 
-import './globals.css';
+import '@/theme/globals.css';
 
 type Props = React.PropsWithChildren;
 

@@ -2,15 +2,16 @@
 
 import { useGameState } from '../_model/use-game-state';
 
+import { GameCell } from './game.cell';
 import { GameLayout } from './game.layout';
 import { GameScore } from './game.score';
 import { GameTile } from './game.tile';
 import { RestartButton } from './restart.button';
 
 export function Game() {
-  const { size, score, bestScore, tiles } = useGameState();
+  const { size, score, bestScore, grid, handleRestart } = useGameState();
 
-  const grid = null;
+  const cells = Array.from(Array(size * size).keys()).map((i) => <GameCell key={i} />);
 
   return (
     <GameLayout
@@ -21,9 +22,9 @@ export function Game() {
           bestScore={bestScore}
         />
       }
-      restart={<RestartButton />}
-      grid={grid}
-      tiles={tiles.map((tile, index) => (
+      restart={<RestartButton onClick={handleRestart} />}
+      cells={cells}
+      tiles={grid.tiles.map((tile, index) => (
         <GameTile
           key={index}
           tile={tile}

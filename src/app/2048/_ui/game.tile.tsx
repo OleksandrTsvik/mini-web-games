@@ -1,10 +1,17 @@
 import { classnames } from '@/shared/lib/class-names';
 import { isNone } from '@/shared/lib/type-guards';
 
-import { Tile } from '../game.types';
+import { Tile } from '../_model/tile';
+
+import styles from './game.module.scss';
 
 type Props = {
   tile: Tile;
+};
+
+type TileCSSProperties = React.CSSProperties & {
+  '--x'?: number;
+  '--y'?: number;
 };
 
 const fontMap: Record<number, string> = {
@@ -30,19 +37,18 @@ const colorMap: Record<number, string> = {
 };
 
 export function GameTile({ tile }: Props) {
+  const style: TileCSSProperties = { '--x': tile.x, '--y': tile.y };
+
   return (
-    <div className="aspect-square bg-neutral-400 dark:bg-neutral-700 rounded-md">
-      {!isNone(tile) && (
-        <div
-          className={classnames(
-            'font-bold flex items-center justify-center w-full h-full rounded-md',
-            fontMap[tile],
-            colorMap[tile],
-          )}
-        >
-          {tile}
-        </div>
-      )}
+    <div
+      className={
+        isNone(tile.value)
+          ? 'hidden'
+          : classnames(styles.grid__tile, 'font-bold', fontMap[tile.value], colorMap[tile.value])
+      }
+      style={style}
+    >
+      {tile.value}
     </div>
   );
 }

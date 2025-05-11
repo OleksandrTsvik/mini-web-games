@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from 'react';
 
 import useKeyboard from '@/hooks/use-keyboard';
-import { handleGameMove } from '@/shared/lib/keyboard.utils';
+import { handleGameKeyboardAction } from '@/shared/lib/keyboard.utils';
 import { shuffle } from '@/shared/lib/random.utils';
 import { KeyboardEventCode } from '@/shared/types';
 
@@ -32,7 +32,7 @@ export function useGameState(initSize: GameSize = 4) {
   const handleKeyboardMove = (key: KeyboardEventCode) => {
     const emptyIndex = tiles.findIndex((tile) => tile === emptyTile);
 
-    handleGameMove(key, {
+    handleGameKeyboardAction(key, {
       up: () => handleMove(emptyIndex + size),
       down: () => handleMove(emptyIndex - size),
       left: () => handleMove(emptyIndex + 1),
