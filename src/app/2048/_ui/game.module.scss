@@ -31,8 +31,7 @@
     height: var(--cell-size);
     border-radius: var(--cell-radius);
     transition-property: top, left, color, background-color, opacity, transform, scale;
-    transition-duration: 200ms;
-    animation: tile-in 200ms;
+    animation-name: tile-in;
   }
 }
 

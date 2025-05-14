@@ -2,6 +2,7 @@ import { classnames } from '@/shared/lib/class-names';
 import { isNone } from '@/shared/lib/type-guards';
 
 import { Tile } from '../_model/tile';
+import { TILE_MOVE_DURATION_MS, TILE_SPAWN_DURATION_MS } from '../game.constants';
 
 import styles from './game.module.scss';
 
@@ -37,15 +38,20 @@ const colorMap: Record<number, string> = {
 };
 
 export function GameTile({ tile }: Props) {
-  const style: TileCSSProperties = { '--x': tile.x, '--y': tile.y };
+  if (isNone(tile.value)) {
+    return null;
+  }
+
+  const style: TileCSSProperties = {
+    '--x': tile.x,
+    '--y': tile.y,
+    transitionDuration: `${TILE_MOVE_DURATION_MS}ms`,
+    animationDuration: `${TILE_SPAWN_DURATION_MS}ms`,
+  };
 
   return (
     <div
-      className={
-        isNone(tile.value)
-          ? 'hidden'
-          : classnames(styles.grid__tile, 'font-bold', fontMap[tile.value], colorMap[tile.value])
-      }
+      className={classnames(styles.grid__tile, 'font-bold', fontMap[tile.value], colorMap[tile.value])}
       style={style}
     >
       {tile.value}

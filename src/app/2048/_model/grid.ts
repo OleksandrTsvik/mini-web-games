@@ -18,10 +18,16 @@ export class Grid {
     const grid = new Grid(tiles);
 
     for (let i = 0; i < randomTileCount; i++) {
-      grid.getRandomEmptyTile().setRandomValue();
+      grid.addRandomTile();
     }
 
     return grid;
+  }
+
+  public addRandomTile(): Grid {
+    this.getRandomEmptyTile().setRandomValue();
+
+    return this;
   }
 
   public getRandomEmptyTile(): Tile {
@@ -49,28 +55,42 @@ export class Grid {
     return this;
   }
 
+  public merge(): Grid {
+    this.tiles.forEach((tile) => tile.merge());
+
+    return this;
+  }
+
   private moveTiles(groupedTiles: Tile[][]): void {
     groupedTiles.forEach((group) => this.moveTilesInGroup(group));
   }
 
   private moveTilesInGroup(group: Tile[]): void {
     for (let i = 1; i < group.length; i++) {
-      if (group[i].isEmpty()) {
+      if (group[i].isEmpty() || group[i].willBeMerged) {
         continue;
       }
 
       const currnetTile = group[i];
 
       let j = i - 1;
-      let moveTo: Tile | null = null;
+      let freeTile: Tile | null = null;
 
       while (j >= 0 && group[j].free(currnetTile)) {
-        moveTo = group[j];
+        freeTile = group[j];
         j--;
       }
 
-      if (moveTo) {
-        currnetTile.merge(moveTo);
+      if (!freeTile) {
+        continue;
+      }
+
+      if (freeTile.isEmpty() || freeTile.willBeMerged) {
+        currnetTile.swapCoordinates(freeTile);
+        [group[i], group[j + 1]] = [group[j + 1], group[i]];
+      } else {
+        currnetTile.setMergeTarget(freeTile);
+        [group[i], group[i - 1]] = [group[i - 1], group[i]];
       }
     }
   }
