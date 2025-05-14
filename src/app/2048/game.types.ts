@@ -7,8 +7,8 @@ export const enum GameStatus {
   Moving,
   Merging,
   Adding,
-  Won,
-  Lose,
+  Victory,
+  Defeat,
 }
 
 export const enum GameMove {

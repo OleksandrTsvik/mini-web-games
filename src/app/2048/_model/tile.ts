@@ -1,4 +1,4 @@
-import { isNone } from '@/shared/lib/type-guards';
+import { isNonNullable, isNone } from '@/shared/lib/type-guards';
 
 import { GameSize } from '../game.types';
 
@@ -39,7 +39,7 @@ export class Tile {
   }
 
   public hasMerge(): boolean {
-    return !isNone(this._mergeTarget);
+    return isNonNullable(this._mergeTarget);
   }
 
   public free(tile: Tile): boolean {
@@ -84,7 +84,7 @@ export class Tile {
 
     if (isNone(this.value)) {
       this.value = this._mergeTarget.value;
-    } else if (!isNone(this._mergeTarget.value)) {
+    } else if (isNonNullable(this._mergeTarget.value)) {
       this.value += this._mergeTarget.value;
     }
 

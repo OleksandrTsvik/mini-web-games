@@ -50,5 +50,7 @@ export function useGameState() {
 
   const handleRestart = () => dispatch({ type: GAME_ACTIONS.RESTART });
 
-  return { size, score, bestScore, grid, handleRestart };
+  const handlePlayAfterWin = () => dispatch({ type: GAME_ACTIONS.PLAY_AFTER_WIN });
+
+  return { status, size, score, bestScore, grid, handleRestart, handlePlayAfterWin };
 }

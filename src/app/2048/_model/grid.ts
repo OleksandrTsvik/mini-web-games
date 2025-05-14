@@ -1,4 +1,5 @@
 import { getRandomElement } from '@/shared/lib/random.utils';
+import { isNonNullable } from '@/shared/lib/type-guards';
 
 import { GameMove, GameSize } from '../game.types';
 
@@ -61,6 +62,32 @@ export class Grid {
     return this;
   }
 
+  public computeAllowedMoves(): GameMove[] {
+    const allowedMoves: GameMove[] = [];
+
+    if (this.canMoveTiles(this.groupTilesByColumn())) {
+      allowedMoves.push(GameMove.UP);
+    }
+
+    if (this.canMoveTiles(this.groupTilesByReversedColumn())) {
+      allowedMoves.push(GameMove.DOWN);
+    }
+
+    if (this.canMoveTiles(this.groupTilesByRow())) {
+      allowedMoves.push(GameMove.LEFT);
+    }
+
+    if (this.canMoveTiles(this.groupTilesByReversedRow())) {
+      allowedMoves.push(GameMove.RIGHT);
+    }
+
+    return allowedMoves;
+  }
+
+  public isWin(minTileToWin: number): boolean {
+    return this.tiles.some((tile) => isNonNullable(tile.value) && tile.value >= minTileToWin);
+  }
+
   private moveTiles(groupedTiles: Tile[][]): void {
     groupedTiles.forEach((group) => this.moveTilesInGroup(group));
   }
@@ -93,6 +120,24 @@ export class Grid {
         [group[i], group[i - 1]] = [group[i - 1], group[i]];
       }
     }
+  }
+
+  private canMoveTiles(groupedTiles: Tile[][]): boolean {
+    return groupedTiles.some((group) => this.canMoveTilesInGroup(group));
+  }
+
+  private canMoveTilesInGroup(group: Tile[]): boolean {
+    return group.some((tile, index) => {
+      if (index === 0) {
+        return false;
+      }
+
+      if (tile.isEmpty()) {
+        return false;
+      }
+
+      return group[index - 1].free(tile);
+    });
   }
 
   private groupTilesByColumn(): Tile[][] {
