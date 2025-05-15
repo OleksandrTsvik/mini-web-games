@@ -30,7 +30,7 @@ const minWidthMap: Record<GameSize, string> = {
 };
 
 const maxWidthMap: Record<GameSize, string> = {
-  4: 'max-w-3/7',
+  4: 'xs:max-w-3/7',
 };
 
 export function GameLayout({ size, showOverlay, score, restart, cells, tiles, overlay }: Props) {

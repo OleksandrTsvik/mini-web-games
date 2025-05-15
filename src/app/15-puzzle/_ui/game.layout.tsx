@@ -16,13 +16,13 @@ type Props = {
 };
 
 const sizeMap: Record<GameSize, string> = {
-  2: 'grid-cols-2 min-w-50 max-w-1/3',
-  3: 'grid-cols-3 min-w-50 max-w-2/5',
-  4: 'grid-cols-4 min-w-56 max-w-3/7',
-  5: 'grid-cols-5 min-w-68 max-w-1/2',
-  6: 'grid-cols-6 min-w-68 max-w-4/7',
-  7: 'grid-cols-7 min-w-68 max-w-3/5',
-  8: 'grid-cols-8 min-w-72 max-w-2/3',
+  2: 'grid-cols-2 min-w-50 xs:max-w-1/3',
+  3: 'grid-cols-3 min-w-50 xs:max-w-2/5',
+  4: 'grid-cols-4 min-w-56 xs:max-w-3/7',
+  5: 'grid-cols-5 min-w-68 xs:max-w-1/2',
+  6: 'grid-cols-6 min-w-68 xs:max-w-4/7',
+  7: 'grid-cols-7 min-w-68 xs:max-w-3/5',
+  8: 'grid-cols-8 min-w-72 xs:max-w-2/3',
 };
 
 export function GameLayout({ size, header, board, overlay, actions }: Props) {
