@@ -1,5 +1,13 @@
 @use '@/theme/variables' as *;
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--spacing) * 2);
+  flex-wrap: wrap;
+}
+
 .grid {
   --size: 4;
   --grid-gap: calc(var(--spacing) * 2);
@@ -32,6 +40,31 @@
     border-radius: var(--cell-radius);
     transition-property: top, left, color, background-color, opacity, transform, scale;
     animation-name: tile-in;
+  }
+}
+
+@media (width < $screen-sm) {
+  .header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'title actions'
+      'score score';
+    gap: calc(var(--spacing) * 3);
+
+    & > :nth-child(1) {
+      grid-area: title;
+    }
+
+    & > :nth-child(2) {
+      grid-area: score;
+      overflow-x: auto;
+    }
+
+    & > :nth-child(3) {
+      grid-area: actions;
+      justify-self: end;
+    }
   }
 }
 

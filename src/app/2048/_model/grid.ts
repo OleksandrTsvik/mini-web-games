@@ -56,10 +56,14 @@ export class Grid {
     return this;
   }
 
-  public merge(): Grid {
-    this.tiles.forEach((tile) => tile.merge());
+  public merge(): number {
+    let score = 0;
 
-    return this;
+    this.tiles.forEach((tile) => {
+      score += tile.merge();
+    });
+
+    return score;
   }
 
   public computeAllowedMoves(): GameMove[] {

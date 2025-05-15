@@ -77,21 +77,26 @@ export class Tile {
     this.swapOriginalCoordinates(tile);
   }
 
-  public merge(): void {
+  public merge(): number {
+    let score = 0;
+
     if (!this._mergeTarget) {
-      return;
+      return score;
     }
 
     if (isNone(this.value)) {
       this.value = this._mergeTarget.value;
     } else if (isNonNullable(this._mergeTarget.value)) {
       this.value += this._mergeTarget.value;
+      score = this.value;
     }
 
     this._mergeTarget.value = null;
     this._mergeTarget.revertToOriginalCoordinates();
     this._mergeTarget.unmarkForMerge();
     this._mergeTarget = null;
+
+    return score;
   }
 
   public clone(): Tile {

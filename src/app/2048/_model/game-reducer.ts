@@ -72,7 +72,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
       return { ...state, status: GameStatus.Moving, grid: state.grid.clone().move(action.payload) };
     case GAME_ACTIONS.MERGE:
-      return { ...state, status: GameStatus.Merging, grid: state.grid.clone().merge() };
+      const grid = state.grid.clone();
+      const score = state.score + grid.merge();
+      const bestScore = Math.max(state.bestScore, score);
+
+      return { ...state, status: GameStatus.Merging, score, bestScore, grid };
     case GAME_ACTIONS.ADD_RANDOM_TILE:
       return { ...state, status: GameStatus.Adding, grid: state.grid.clone().addRandomTile() };
     case GAME_ACTIONS.COMPUTE:

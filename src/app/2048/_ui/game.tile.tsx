@@ -38,16 +38,16 @@ const colorMap: Record<number, string> = {
 };
 
 export function GameTile({ tile }: Props) {
-  if (isNone(tile.value)) {
-    return null;
-  }
-
   const style: TileCSSProperties = {
     '--x': tile.x,
     '--y': tile.y,
     transitionDuration: `${TILE_MOVE_DURATION_MS}ms`,
     animationDuration: `${TILE_SPAWN_DURATION_MS}ms`,
   };
+
+  if (isNone(tile.value)) {
+    return null;
+  }
 
   return (
     <div

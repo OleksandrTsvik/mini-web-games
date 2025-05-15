@@ -38,7 +38,7 @@ export function GameLayout({ size, showOverlay, score, restart, cells, tiles, ov
 
   return (
     <>
-      <div className={classnames('flex items-center justify-between gap-2 flex-wrap', rubik.className)}>
+      <div className={classnames(styles.header, rubik.className)}>
         <div className="flex items-center gap-2">
           <Heading>2048</Heading>
           <Divider
