@@ -1,7 +1,7 @@
 import { getRandomElement } from '@/shared/lib/random.utils';
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { GameMove, GameSize } from '../game.types';
+import { GameMove, GameSize, StoredTile } from '../game.types';
 
 import { Tile } from './tile';
 
@@ -90,6 +90,10 @@ export class Grid {
 
   public isWin(minTileToWin: number): boolean {
     return this.tiles.some((tile) => isNonNullable(tile.value) && tile.value >= minTileToWin);
+  }
+
+  public serialize(): StoredTile[] {
+    return this.tiles.map((tile) => ({ value: tile.value, x: tile.x, y: tile.y }));
   }
 
   private moveTiles(groupedTiles: Tile[][]): void {

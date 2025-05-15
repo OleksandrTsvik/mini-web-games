@@ -4,7 +4,7 @@ import {
   DEFAULT_INIT_TILE_COUNT,
   DEFAULT_MIN_TILE_TO_WIN,
 } from '../game.constants';
-import { GameMove, GameSize, GameStatus } from '../game.types';
+import { GameMove, GameSize, GameStatus, InitGamePayload } from '../game.types';
 
 import { Grid } from './grid';
 
@@ -43,7 +43,7 @@ export function initGameState({
 }
 
 export const enum GAME_ACTIONS {
-  INIT_TILES,
+  INIT_GAME,
   MOVE,
   MERGE,
   ADD_RANDOM_TILE,
@@ -53,7 +53,7 @@ export const enum GAME_ACTIONS {
 }
 
 type GameAction =
-  | { type: GAME_ACTIONS.INIT_TILES }
+  | { type: GAME_ACTIONS.INIT_GAME; payload?: InitGamePayload }
   | { type: GAME_ACTIONS.MOVE; payload: GameMove }
   | { type: GAME_ACTIONS.MERGE }
   | { type: GAME_ACTIONS.ADD_RANDOM_TILE }
@@ -63,8 +63,15 @@ type GameAction =
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
-    case GAME_ACTIONS.INIT_TILES:
-      return { ...state, status: GameStatus.Active, grid: Grid.create(state.grid.size, state.initTileCount) };
+    case GAME_ACTIONS.INIT_GAME:
+      return {
+        ...state,
+        status: GameStatus.Active,
+        isPlayAfterWin: action.payload?.isPlayAfterWin ?? state.isPlayAfterWin,
+        score: action.payload?.score ?? state.score,
+        bestScore: action.payload?.bestScore ?? state.bestScore,
+        grid: action.payload?.grid ?? Grid.create(state.grid.size, state.initTileCount),
+      };
     case GAME_ACTIONS.MOVE:
       if (!state.allowedMoves.includes(action.payload)) {
         return state;

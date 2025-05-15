@@ -8,15 +8,32 @@ import { TILE_MOVE_DURATION_MS } from '../game.constants';
 import { GameMove, GameStatus } from '../game.types';
 
 import { GAME_ACTIONS, gameReducer, initGameState } from './game-reducer';
+import { clearGameState, loadGameState, saveGameState } from './game-storage';
 
 export function useGameState() {
-  const [{ status, score, bestScore, grid }, dispatch] = useReducer(gameReducer, {}, initGameState);
+  const [{ status, isPlayAfterWin, score, bestScore, grid }, dispatch] = useReducer(gameReducer, {}, initGameState);
 
   const size = grid.size;
 
   useLayoutEffect(() => {
-    dispatch({ type: GAME_ACTIONS.INIT_TILES });
+    try {
+      dispatch({ type: GAME_ACTIONS.INIT_GAME, payload: loadGameState() });
+    } catch {
+      dispatch({ type: GAME_ACTIONS.INIT_GAME });
+    }
   }, []);
+
+  useEffect(() => {
+    switch (status) {
+      case GameStatus.Active:
+      case GameStatus.Victory:
+        saveGameState(isPlayAfterWin, score, bestScore, grid);
+        break;
+      case GameStatus.Defeat:
+        clearGameState(bestScore);
+        break;
+    }
+  }, [bestScore, grid, isPlayAfterWin, score, status]);
 
   const handleKeyboardAction = (key: KeyboardEventCode) => {
     if (status !== GameStatus.Active) {
