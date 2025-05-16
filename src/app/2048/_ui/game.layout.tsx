@@ -14,6 +14,7 @@ const rubik = Rubik({ weight: '400', subsets: ['cyrillic', 'latin'] });
 type Props = {
   size: GameSize;
   showOverlay: boolean;
+  gridContainerRef: React.RefObject<HTMLDivElement | null>;
   score: React.ReactNode;
   restart: React.ReactNode;
   cells: React.ReactNode;
@@ -33,7 +34,7 @@ const maxWidthMap: Record<GameSize, string> = {
   4: 'xs:max-w-3/7',
 };
 
-export function GameLayout({ size, showOverlay, score, restart, cells, tiles, overlay }: Props) {
+export function GameLayout({ size, showOverlay, gridContainerRef, score, restart, cells, tiles, overlay }: Props) {
   const gridStyle: GridCSSProperties = { '--size': size };
 
   return (
@@ -53,14 +54,15 @@ export function GameLayout({ size, showOverlay, score, restart, cells, tiles, ov
       <Divider />
       <div
         className={classnames(
-          'relative text-lg sm:text-2xl md:text-4xl lg:text-5xl flex items-center justify-center overflow-x-auto',
+          'relative text-xl sm:text-2xl md:text-4xl lg:text-5xl flex items-center justify-center overflow-x-auto',
           rubik.className,
         )}
       >
         <div
+          ref={gridContainerRef}
           className={classnames(
             styles.grid,
-            'bg-neutral-500 dark:bg-neutral-800 border-neutral-500 dark:border-neutral-800',
+            'bg-neutral-500 dark:bg-neutral-800 border-neutral-500 dark:border-neutral-800 cursor-default',
             minWidthMap[size],
             maxWidthMap[size],
           )}

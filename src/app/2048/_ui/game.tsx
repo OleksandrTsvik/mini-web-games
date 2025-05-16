@@ -11,7 +11,7 @@ import { GameTile } from './game.tile';
 import { RestartButton } from './restart.button';
 
 export function Game() {
-  const { status, size, score, bestScore, grid, handleRestart, handlePlayAfterWin } = useGameState();
+  const { status, size, score, bestScore, grid, gridContainerRef, handleRestart, handlePlayAfterWin } = useGameState();
 
   const cells = Array.from(Array(size * size).keys()).map((i) => <GameCell key={i} />);
 
@@ -21,6 +21,7 @@ export function Game() {
     <GameLayout
       size={size}
       showOverlay={showOverlay}
+      gridContainerRef={gridContainerRef}
       score={
         <GameScore
           score={score}

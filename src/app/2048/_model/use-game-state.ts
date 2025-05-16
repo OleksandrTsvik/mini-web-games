@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useReducer } from 'react';
 
 import useKeyboard from '@/hooks/use-keyboard';
+import useSwipe, { SwipeActions } from '@/hooks/use-swipe';
 import { handleGameKeyboardAction } from '@/shared/lib/keyboard.utils';
 import { KeyboardEventCode } from '@/shared/types';
 
@@ -36,10 +37,6 @@ export function useGameState() {
   }, [bestScore, grid, isPlayAfterWin, score, status]);
 
   const handleKeyboardAction = (key: KeyboardEventCode) => {
-    if (status !== GameStatus.Active) {
-      return;
-    }
-
     handleGameKeyboardAction(key, {
       up: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.UP }),
       down: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.DOWN }),
@@ -50,6 +47,15 @@ export function useGameState() {
   };
 
   useKeyboard(handleKeyboardAction);
+
+  const swipeActions: SwipeActions = {
+    up: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.UP }),
+    down: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.DOWN }),
+    left: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.LEFT }),
+    right: () => dispatch({ type: GAME_ACTIONS.MOVE, payload: GameMove.RIGHT }),
+  };
+
+  const gridContainerRef = useSwipe(swipeActions);
 
   useEffect(() => {
     switch (status) {
@@ -69,5 +75,5 @@ export function useGameState() {
 
   const handlePlayAfterWin = () => dispatch({ type: GAME_ACTIONS.PLAY_AFTER_WIN });
 
-  return { status, size, score, bestScore, grid, handleRestart, handlePlayAfterWin };
+  return { status, size, score, bestScore, grid, gridContainerRef, handleRestart, handlePlayAfterWin };
 }

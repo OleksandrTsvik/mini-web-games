@@ -73,7 +73,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         grid: action.payload?.grid ?? Grid.create(state.grid.size, state.initTileCount),
       };
     case GAME_ACTIONS.MOVE:
-      if (!state.allowedMoves.includes(action.payload)) {
+      if (state.status !== GameStatus.Active || !state.allowedMoves.includes(action.payload)) {
         return state;
       }
 
@@ -98,6 +98,14 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
       return { ...state, status, allowedMoves };
     case GAME_ACTIONS.RESTART:
+      if (
+        state.status !== GameStatus.Active &&
+        state.status !== GameStatus.Victory &&
+        state.status !== GameStatus.Defeat
+      ) {
+        return state;
+      }
+
       return {
         ...state,
         status: GameStatus.Active,

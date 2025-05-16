@@ -50,12 +50,12 @@ export class Tile {
     this.value = Math.random() < 0.9 ? 2 : 4;
   }
 
-  public setCoordinates(x: number, y: number): void {
+  public setPosition(x: number, y: number): void {
     this.x = x;
     this.y = y;
   }
 
-  public swapCoordinates(tile: Tile): void {
+  public swapPositions(tile: Tile): void {
     if (tile.willBeMerged) {
       [this.x, tile._originalX] = [tile._originalX, this.x];
       [this.y, tile._originalY] = [tile._originalY, this.y];
@@ -66,15 +66,15 @@ export class Tile {
       [this.x, tile.x] = [tile.x, this.x];
       [this.y, tile.y] = [tile.y, this.y];
 
-      this.swapOriginalCoordinates(tile);
+      this.swapOriginalPositions(tile);
     }
   }
 
   public setMergeTarget(tile: Tile): void {
     this._mergeTarget = tile;
     tile.markForMerge();
-    this.setCoordinates(tile.x, tile.y);
-    this.swapOriginalCoordinates(tile);
+    this.setPosition(tile.x, tile.y);
+    this.swapOriginalPositions(tile);
   }
 
   public merge(): number {
@@ -92,7 +92,7 @@ export class Tile {
     }
 
     this._mergeTarget.value = null;
-    this._mergeTarget.revertToOriginalCoordinates();
+    this._mergeTarget.revertToOriginalPosition();
     this._mergeTarget.unmarkForMerge();
     this._mergeTarget = null;
 
@@ -111,12 +111,12 @@ export class Tile {
     this._willBeMerged = false;
   }
 
-  private swapOriginalCoordinates(tile: Tile): void {
+  private swapOriginalPositions(tile: Tile): void {
     [this._originalX, tile._originalX] = [tile._originalX, this._originalX];
     [this._originalY, tile._originalY] = [tile._originalY, this._originalY];
   }
 
-  private revertToOriginalCoordinates(): void {
+  private revertToOriginalPosition(): void {
     this.x = this._originalX;
     this.y = this._originalY;
   }

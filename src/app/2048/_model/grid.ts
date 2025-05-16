@@ -121,7 +121,7 @@ export class Grid {
       }
 
       if (freeTile.isEmpty() || freeTile.willBeMerged) {
-        currnetTile.swapCoordinates(freeTile);
+        currnetTile.swapPositions(freeTile);
         [group[i], group[j + 1]] = [group[j + 1], group[i]];
       } else {
         currnetTile.setMergeTarget(freeTile);

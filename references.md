@@ -1,5 +1,9 @@
 # References
 
+## General
+
+- [[YouTube] How To Detect Swipe Direction With Javascript](https://www.youtube.com/watch?v=FuU0CMvLunE)
+
 ## Tic-Tac-Toe
 
 - [Tutorial: Tic-Tac-Toe](https://react.dev/learn/tutorial-tic-tac-toe)
