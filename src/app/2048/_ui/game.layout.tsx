@@ -1,9 +1,8 @@
 import { Rubik } from 'next/font/google';
 
+import HeadingWithGameControls from '@/features/heading-with-game-controls';
 import { classnames } from '@/shared/lib/class-names';
 import Divider from '@/shared/ui/divider';
-import Heading from '@/shared/ui/heading';
-import KeyboardArrowsIcon from '@/shared/ui/icons/keyboard-arrows.icon';
 
 import { GameSize } from '../game.types';
 
@@ -40,14 +39,7 @@ export function GameLayout({ size, showOverlay, gridContainerRef, score, restart
   return (
     <>
       <div className={classnames(styles.header, rubik.className)}>
-        <div className="flex items-center gap-2">
-          <Heading>2048</Heading>
-          <Divider
-            className="h-6"
-            type="horizontal"
-          />
-          <KeyboardArrowsIcon className="text-black dark:text-white size-10" />
-        </div>
+        <HeadingWithGameControls title="2048" />
         <div className="flex items-center justify-center gap-4">{score}</div>
         {restart}
       </div>
