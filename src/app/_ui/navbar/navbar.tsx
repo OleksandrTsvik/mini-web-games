@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import ThemeToggle from './theme-toggle';
+import { ThemeToggle } from './theme-toggle';
 
 import logo from '@/assets/logo.svg';
 
-export default function Navbar() {
+export function Navbar() {
   return (
     <header className="flex items-center px-4">
       <div className="min-w-0 flex-1">

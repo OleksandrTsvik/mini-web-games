@@ -8,7 +8,7 @@ type Props = {
   title: string;
 };
 
-export default function GameCard({ href, src, title }: Props) {
+export function GameCard({ href, src, title }: Props) {
   return (
     <Link
       href={href}

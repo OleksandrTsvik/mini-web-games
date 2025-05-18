@@ -19,7 +19,7 @@ const events: Record<SwipeDevice, Record<SwipeEventType, string>> = {
   pointer: { down: 'pointerdown', up: 'pointerup' },
 };
 
-export default function useSwipe<T extends HTMLElement = HTMLDivElement>(actions: SwipeActions) {
+export function useSwipe<T extends HTMLElement = HTMLDivElement>(actions: SwipeActions) {
   const containerRef = useRef<T>(null);
 
   const actionsRef = useRef(actions);

@@ -1,7 +1,8 @@
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { getNextPlayer } from '../_lib/utils';
 import { Player } from '../game.types';
+
+import { getNextPlayer } from './utils';
 
 export const INIT_GAME_STATE = {
   humanPlayer: Player.X,

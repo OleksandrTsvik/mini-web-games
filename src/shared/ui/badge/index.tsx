@@ -33,7 +33,7 @@ const colorMap: Record<BadgeColor, string> = {
   zinc: 'bg-zinc-600/10 text-zinc-700 hover:bg-zinc-600/20 dark:bg-white/5 dark:text-zinc-400 dark:hover:bg-white/10',
 };
 
-export default function Badge({ color, className, children, ...props }: Props) {
+export function Badge({ color, className, children, ...props }: Props) {
   return (
     <span
       className={classnames(

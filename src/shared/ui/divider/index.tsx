@@ -11,7 +11,7 @@ const typeMap: Record<DividerType, string> = {
   vertical: 'w-full border-t border-zinc-950/10 dark:border-white/10 my-6',
 };
 
-export default function Divider({ type = 'vertical', className, ...props }: Props) {
+export function Divider({ type = 'vertical', className, ...props }: Props) {
   return (
     <div
       className={classnames(typeMap[type], className)}

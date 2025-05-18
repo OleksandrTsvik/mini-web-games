@@ -4,7 +4,7 @@ type Props = {
   screenReader?: string;
 };
 
-export default function SocialLink({ href, icon, screenReader }: Props) {
+export function SocialLink({ href, icon, screenReader }: Props) {
   return (
     <a
       href={href}

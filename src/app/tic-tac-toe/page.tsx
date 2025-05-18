@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { ROUTING } from '@/app/routing';
-import Button from '@/shared/ui/button';
-import Divider from '@/shared/ui/divider';
-import Heading from '@/shared/ui/heading';
+import { Button } from '@/shared/ui/button';
+import { Divider } from '@/shared/ui/divider';
+import { Heading } from '@/shared/ui/heading';
 
 import { BOT_LEVEL } from './local/game.constants';
 

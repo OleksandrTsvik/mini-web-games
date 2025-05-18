@@ -3,7 +3,7 @@
 import { ROUTING } from '@/app/routing';
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { useGameState } from '../_hooks/use-game-state';
+import { useGameState } from '../_model/use-game-state';
 import { BotLevel } from '../game.types';
 
 import { GameSquare } from './game-square';

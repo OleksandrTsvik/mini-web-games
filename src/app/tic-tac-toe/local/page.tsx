@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Game } from './_components';
+import { Game } from './_ui';
 import { BotLevel } from './game.types';
 
 type SearchParams = Promise<{ bot?: BotLevel }>;

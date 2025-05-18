@@ -1,12 +1,12 @@
-import Divider from '@/shared/ui/divider';
-import Heading from '@/shared/ui/heading';
-import KeyboardArrowsIcon from '@/shared/ui/icons/keyboard-arrows.icon';
+import { Divider } from '@/shared/ui/divider';
+import { Heading } from '@/shared/ui/heading';
+import { KeyboardArrowsIcon } from '@/shared/ui/icons/keyboard-arrows.icon';
 
 type Props = {
   title: string;
 };
 
-export default function HeadingWithGameControls({ title }: Props) {
+export function HeadingWithGameControls({ title }: Props) {
   return (
     <div className="flex items-center gap-2">
       <Heading>{title}</Heading>

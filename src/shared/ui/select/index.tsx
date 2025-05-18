@@ -21,7 +21,7 @@ type Props<ValueType> = {
   onChange?: (value: ValueType) => void;
 };
 
-export default function Select<ValueType>({ label, value, options, className, onChange }: Props<ValueType>) {
+export function Select<ValueType>({ label, value, options, className, onChange }: Props<ValueType>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(options?.find((option) => option.value === value));
 

@@ -35,7 +35,7 @@ function colorMap(component: Props['color']): string {
   }
 }
 
-export default function Heading({ as = 'h1', color, className, children, ...props }: Props) {
+export function Heading({ as = 'h1', color, className, children, ...props }: Props) {
   const Component = as;
 
   const sizeClassNames = sizeMap(as);

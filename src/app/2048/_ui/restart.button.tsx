@@ -1,6 +1,6 @@
 import { ArrowClockwise } from '@phosphor-icons/react';
 
-import Button from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button';
 
 type Props = {
   onClick: () => void;

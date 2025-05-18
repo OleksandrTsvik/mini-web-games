@@ -1,4 +1,4 @@
-import Divider from '@/shared/ui/divider';
+import { Divider } from '@/shared/ui/divider';
 
 import styles from './game.module.scss';
 

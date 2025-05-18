@@ -1,4 +1,4 @@
-import Badge, { BadgeColor } from '@/shared/ui/badge';
+import { Badge, BadgeColor } from '@/shared/ui/badge';
 
 import { BOT_LEVEL } from '../../game.constants';
 import { BotLevel } from '../../game.types';

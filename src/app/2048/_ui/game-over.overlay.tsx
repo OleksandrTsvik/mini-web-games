@@ -1,6 +1,6 @@
 import { ArrowClockwise, Play } from '@phosphor-icons/react/dist/ssr';
 
-import Button from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button';
 
 import { GameStatus } from '../game.types';
 

@@ -1,7 +1,7 @@
 import { Faders } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
 
-import Button from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button';
 
 type Props = {
   href: string;

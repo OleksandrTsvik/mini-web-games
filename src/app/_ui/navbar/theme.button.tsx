@@ -1,6 +1,6 @@
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function ThemeButton({ children, ...props }: Props) {
+export function ThemeButton({ children, ...props }: Props) {
   return (
     <button
       {...props}

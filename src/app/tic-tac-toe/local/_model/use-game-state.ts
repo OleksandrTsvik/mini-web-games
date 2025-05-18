@@ -2,12 +2,12 @@ import { useCallback, useEffect, useReducer } from 'react';
 
 import { isNonNullable } from '@/shared/lib/type-guards';
 
-import { calculateWinner } from '../_lib/calculate-winner';
-import { getBotByLevel, getNextPlayer } from '../_lib/utils';
 import { BOT_MOVE_DELAY_MS } from '../game.constants';
 import { BotLevel, Player } from '../game.types';
 
+import { calculateWinner } from './calculate-winner';
 import { GAME_ACTIONS, INIT_GAME_STATE, gameReducer } from './game-reducer';
+import { getBotByLevel, getNextPlayer } from './utils';
 
 export function useGameState(botLevel?: BotLevel) {
   const [{ humanPlayer, currentPlayer, squares }, dispatch] = useReducer(gameReducer, INIT_GAME_STATE);

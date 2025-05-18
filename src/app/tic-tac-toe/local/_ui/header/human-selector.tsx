@@ -1,5 +1,5 @@
 import { classnames } from '@/shared/lib/class-names';
-import Button from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button';
 
 import { Player } from '../../game.types';
 import { GameSymbol } from '../game-symbol';

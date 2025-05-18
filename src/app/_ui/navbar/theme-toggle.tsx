@@ -3,11 +3,11 @@
 import { Monitor, Moon, Sun } from '@phosphor-icons/react/dist/ssr';
 import { useTheme } from 'next-themes';
 
-import useMounted from '@/hooks/use-mounted';
+import { useMounted } from '@/hooks/use-mounted';
 
-import ThemeButton from './theme.button';
+import { ThemeButton } from './theme.button';
 
-export default function ThemeToggle() {
+export function ThemeToggle() {
   const mounted = useMounted();
   const { theme, setTheme, systemTheme } = useTheme();
 

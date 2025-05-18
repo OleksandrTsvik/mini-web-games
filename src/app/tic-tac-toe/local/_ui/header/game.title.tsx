@@ -1,4 +1,4 @@
-import Heading from '@/shared/ui/heading';
+import { Heading } from '@/shared/ui/heading';
 
 import { BotLevel } from '../../game.types';
 

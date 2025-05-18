@@ -1,7 +1,7 @@
 import { Pacifico } from 'next/font/google';
 
 import { classnames } from '@/shared/lib/class-names';
-import Divider from '@/shared/ui/divider';
+import { Divider } from '@/shared/ui/divider';
 
 import { GameSize } from '../game.types';
 

@@ -1,8 +1,8 @@
 import { Rubik } from 'next/font/google';
 
-import HeadingWithGameControls from '@/features/heading-with-game-controls';
+import { HeadingWithGameControls } from '@/features/heading-with-game-controls';
 import { classnames } from '@/shared/lib/class-names';
-import Divider from '@/shared/ui/divider';
+import { Divider } from '@/shared/ui/divider';
 
 import { GameSize } from '../game.types';
 
