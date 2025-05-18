@@ -63,46 +63,42 @@ type GameAction =
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
-    case GAME_ACTIONS.INIT_GAME:
-      return {
-        ...state,
-        status: GameStatus.Active,
-        isPlayAfterWin: action.payload?.isPlayAfterWin ?? state.isPlayAfterWin,
-        score: action.payload?.score ?? state.score,
-        bestScore: action.payload?.bestScore ?? state.bestScore,
-        grid: action.payload?.grid ?? Grid.create(state.grid.size, state.initTileCount),
-      };
-    case GAME_ACTIONS.MOVE:
-      if (state.status !== GameStatus.Active || !state.allowedMoves.includes(action.payload)) {
+    case GAME_ACTIONS.INIT_GAME: {
+      const isPlayAfterWin = action.payload?.isPlayAfterWin ?? state.isPlayAfterWin;
+      const score = action.payload?.score ?? state.score;
+      const bestScore = action.payload?.bestScore ?? state.bestScore;
+
+      const grid = action.payload?.grid ?? Grid.create(state.grid.size, state.initTileCount);
+      const allowedMoves = grid.computeAllowedMoves();
+      const status = updateStatus(allowedMoves, grid, isPlayAfterWin, state.minTileToWin);
+
+      return { ...state, status, isPlayAfterWin, score, bestScore, grid, allowedMoves };
+    }
+    case GAME_ACTIONS.MOVE: {
+      if (!canMove(state, action.payload)) {
         return state;
       }
 
       return { ...state, status: GameStatus.Moving, grid: state.grid.clone().move(action.payload) };
-    case GAME_ACTIONS.MERGE:
+    }
+    case GAME_ACTIONS.MERGE: {
       const grid = state.grid.clone();
       const score = state.score + grid.merge();
       const bestScore = Math.max(state.bestScore, score);
 
       return { ...state, status: GameStatus.Merging, score, bestScore, grid };
-    case GAME_ACTIONS.ADD_RANDOM_TILE:
+    }
+    case GAME_ACTIONS.ADD_RANDOM_TILE: {
       return { ...state, status: GameStatus.Adding, grid: state.grid.clone().addRandomTile() };
-    case GAME_ACTIONS.COMPUTE:
-      let status = GameStatus.Active;
+    }
+    case GAME_ACTIONS.COMPUTE: {
       const allowedMoves = state.grid.computeAllowedMoves();
-
-      if (!allowedMoves.length) {
-        status = GameStatus.Defeat;
-      } else if (!state.isPlayAfterWin && state.grid.isWin(state.minTileToWin)) {
-        status = GameStatus.Victory;
-      }
+      const status = updateStatus(allowedMoves, state.grid, state.isPlayAfterWin, state.minTileToWin);
 
       return { ...state, status, allowedMoves };
-    case GAME_ACTIONS.RESTART:
-      if (
-        state.status !== GameStatus.Active &&
-        state.status !== GameStatus.Victory &&
-        state.status !== GameStatus.Defeat
-      ) {
+    }
+    case GAME_ACTIONS.RESTART: {
+      if (!canRestart(state)) {
         return state;
       }
 
@@ -114,9 +110,34 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         grid: Grid.create(state.grid.size, state.initTileCount),
         allowedMoves: DEFAULT_ALLOWED_MOVES,
       };
-    case GAME_ACTIONS.PLAY_AFTER_WIN:
+    }
+    case GAME_ACTIONS.PLAY_AFTER_WIN: {
       return { ...state, status: GameStatus.Active, isPlayAfterWin: true };
-    default:
+    }
+    default: {
       return state;
+    }
   }
+}
+
+function updateStatus(allowedMoves: GameMove[], grid: Grid, isPlayAfterWin: boolean, minTileToWin: number): GameStatus {
+  let status = GameStatus.Active;
+
+  if (!allowedMoves.length) {
+    status = GameStatus.Defeat;
+  } else if (!isPlayAfterWin && grid.isWin(minTileToWin)) {
+    status = GameStatus.Victory;
+  }
+
+  return status;
+}
+
+function canMove(state: GameState, move: GameMove): boolean {
+  return state.status === GameStatus.Active && state.allowedMoves.includes(move);
+}
+
+function canRestart(state: GameState): boolean {
+  return (
+    state.status === GameStatus.Active || state.status === GameStatus.Victory || state.status === GameStatus.Defeat
+  );
 }
