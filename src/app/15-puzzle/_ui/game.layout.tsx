@@ -30,15 +30,10 @@ export function GameLayout({ size, header, board, overlay, actions }: Props) {
     <>
       {header}
       <Divider />
-      <div
-        className={classnames(
-          'text-lg sm:text-2xl md:text-4xl lg:text-5xl flex items-center justify-center overflow-x-auto',
-          pacifico.className,
-        )}
-      >
+      <div className={classnames('text-lg sm:text-2xl md:text-4xl lg:text-5xl overflow-x-auto', pacifico.className)}>
         <div
           className={classnames(
-            'relative grid gap-2 md:gap-3 lg:gap-4 w-full p-2 sm:p-4 md:p-5 rounded-lg bg-gray-700',
+            'relative grid gap-2 md:gap-3 lg:gap-4 w-full mx-auto p-2 sm:p-4 md:p-5 rounded-lg bg-gray-700',
             sizeMap[size],
           )}
         >

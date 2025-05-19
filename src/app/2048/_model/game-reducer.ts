@@ -19,7 +19,7 @@ type GameState = {
   minTileToWin: number;
 };
 
-type InitGameArgument = {
+type InitGameStateArgument = {
   size?: GameSize;
   bestScore?: number;
   initTileCount?: number;
@@ -29,7 +29,7 @@ export function initGameState({
   size = DEFAULT_GRID_SIZE,
   bestScore = 0,
   initTileCount = DEFAULT_INIT_TILE_COUNT,
-}: InitGameArgument): GameState {
+}: InitGameStateArgument): GameState {
   return {
     status: GameStatus.Active,
     isPlayAfterWin: false,

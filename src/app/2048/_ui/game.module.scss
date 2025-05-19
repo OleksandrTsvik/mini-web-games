@@ -19,6 +19,7 @@
   grid-template-columns: repeat(var(--size), minmax(0, 1fr));
   gap: var(--grid-gap);
   width: 100%;
+  margin-inline: auto;
   border-style: solid;
   border-width: calc(var(--spacing) * 2);
   border-radius: var(--radius-lg);

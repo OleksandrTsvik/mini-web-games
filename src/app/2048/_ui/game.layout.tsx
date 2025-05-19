@@ -45,10 +45,7 @@ export function GameLayout({ size, showOverlay, gridContainerRef, score, restart
       </div>
       <Divider />
       <div
-        className={classnames(
-          'relative text-xl sm:text-2xl md:text-4xl lg:text-5xl flex items-center justify-center overflow-x-auto',
-          rubik.className,
-        )}
+        className={classnames('relative text-xl sm:text-2xl md:text-4xl lg:text-5xl overflow-x-auto', rubik.className)}
       >
         <div
           ref={gridContainerRef}
