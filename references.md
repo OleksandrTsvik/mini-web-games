@@ -17,3 +17,7 @@
 
 - [[GitHub] 2048 by Gabriele Cirulli](https://github.com/gabrielecirulli/2048)
 - [[YouTube] 2048 на JavaScript разработка игры](https://www.youtube.com/watch?v=Mhb910JSD4U)
+
+## Sudoku
+
+- [[YouTube] Судоку на JavaScript разработка игры](https://www.youtube.com/watch?v=Tz8zq0Y7W90)

@@ -10,4 +10,5 @@ export const ROUTING = {
     queryString.stringifyUrl({ url: '/tic-tac-toe/local', query: { bot: botLevel } }, stringifyOptions),
   FIFTEEN_PUZZLE: '/15-puzzle',
   GAME_2048: '/2048',
+  SUDOKU: '/sudoku',
 };

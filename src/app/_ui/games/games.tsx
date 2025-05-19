@@ -10,6 +10,7 @@ const GAME_LIST = [
   { title: 'Tic-Tac-Toe', href: ROUTING.TIC_TAC_TOE, src: ticTacToe },
   { title: '15 Puzzle', href: ROUTING.FIFTEEN_PUZZLE, src: fifteenPuzzle },
   { title: '2048', href: ROUTING.GAME_2048, src: game2048 },
+  { title: 'Sudoku', href: ROUTING.SUDOKU, src: game2048 },
 ];
 
 export function Games() {
