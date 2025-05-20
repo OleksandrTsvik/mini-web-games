@@ -1,5 +1,11 @@
 import { useLayoutEffect, useReducer } from 'react';
 
+import { useClickOutside } from '@/hooks/use-click-outside';
+import { useKeyboard } from '@/hooks/use-keyboard';
+import { KEYBOARD_EVENT_CODE, KeyboardEventCode } from '@/shared/types';
+
+import { GameMove } from '../game.types';
+
 import { GAME_ACTIONS, gameReducer, initGameState } from './game-reducer';
 
 export function useGameState() {
@@ -9,7 +15,37 @@ export function useGameState() {
     dispatch({ type: GAME_ACTIONS.INIT_GAME });
   }, []);
 
-  const handleCellSelect = (index: number) => dispatch({ type: GAME_ACTIONS.SELECT_CELL, payload: index });
+  const handleKeyboardAction = (key: KeyboardEventCode) => {
+    switch (key) {
+      case KEYBOARD_EVENT_CODE.ARROW_UP:
+      case KEYBOARD_EVENT_CODE.W:
+        dispatch({ type: GAME_ACTIONS.SELECT_CELL, payload: { move: GameMove.UP } });
+        break;
+      case KEYBOARD_EVENT_CODE.ARROW_DOWN:
+      case KEYBOARD_EVENT_CODE.S:
+        dispatch({ type: GAME_ACTIONS.SELECT_CELL, payload: { move: GameMove.DOWN } });
+        break;
+      case KEYBOARD_EVENT_CODE.ARROW_LEFT:
+      case KEYBOARD_EVENT_CODE.A:
+        dispatch({ type: GAME_ACTIONS.SELECT_CELL, payload: { move: GameMove.LEFT } });
+        break;
+      case KEYBOARD_EVENT_CODE.ARROW_RIGHT:
+      case KEYBOARD_EVENT_CODE.D:
+        dispatch({ type: GAME_ACTIONS.SELECT_CELL, payload: { move: GameMove.RIGHT } });
+        break;
+      default:
+        dispatch({ type: GAME_ACTIONS.CHANGE_CELL_VALUE, payload: +key.replace(/\D+/, '') });
+        break;
+    }
+  };
 
-  return { grid, handleCellSelect };
+  useKeyboard(handleKeyboardAction);
+
+  const handleClickOutsideGrid = () => dispatch({ type: GAME_ACTIONS.SELECT_CELL });
+
+  const gridContainerRef = useClickOutside(handleClickOutsideGrid);
+
+  const handleCellClick = (index: number) => dispatch({ type: GAME_ACTIONS.SELECT_CELL, payload: { index } });
+
+  return { grid, gridContainerRef, handleCellClick };
 }

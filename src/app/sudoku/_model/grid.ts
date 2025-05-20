@@ -32,7 +32,12 @@ export class Grid {
     return grid;
   }
 
-  public selectCell(index: number): Grid {
+  public selectCell(index: number | null): Grid {
+    if (isNone(index)) {
+      this.cells.forEach((cell) => (cell.status = null));
+      return this;
+    }
+
     const selectedCell = this.cells[index];
 
     const rowIndexes = this.getRowIndexes(index);
@@ -53,6 +58,12 @@ export class Grid {
         this.cells[i].status = null;
       }
     }
+
+    return this;
+  }
+
+  public changeCellValue(index: number, value: number): Grid {
+    this.cells[index].value = value;
 
     return this;
   }

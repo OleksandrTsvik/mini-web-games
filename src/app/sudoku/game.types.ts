@@ -10,3 +10,10 @@ export const enum CellStatus {
   Same,
   Wrong,
 }
+
+export const enum GameMove {
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
+}

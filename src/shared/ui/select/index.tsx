@@ -29,7 +29,7 @@ export function Select<ValueType>({ label, value, options, className, onChange }
     setIsOpen(false);
   };
 
-  const ref = useClickOutside<HTMLDivElement>(handleClose);
+  const ref = useClickOutside(handleClose);
 
   const handleOpenToggle = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);

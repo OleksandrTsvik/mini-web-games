@@ -13,7 +13,7 @@ import { GameHeader } from './game.header';
 const lora = Lora({ weight: '400', subsets: ['latin'] });
 
 export function Game() {
-  const { grid, handleCellSelect } = useGameState();
+  const { grid, gridContainerRef, handleCellClick } = useGameState();
 
   return (
     <>
@@ -21,6 +21,7 @@ export function Game() {
       <Divider />
       <div className="overflow-x-auto">
         <div
+          ref={gridContainerRef}
           className={classnames(
             'text-lg sm:text-2xl md:text-2xl lg:text-3xl',
             'grid grid-cols-9 gap-1',
@@ -33,7 +34,7 @@ export function Game() {
               key={index}
               index={index}
               cell={cell}
-              onClick={handleCellSelect}
+              onClick={handleCellClick}
             />
           ))}
         </div>

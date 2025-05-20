@@ -12,6 +12,8 @@ The repository currently includes the following games:
 
 3. 2048: A single-player puzzle game where players slide numbered tiles on a 4x4 grid to combine tiles with the same numbers, aiming to create a tile with the value 2048.
 
+4. Sudoku: A logic-based number placement puzzle where players fill a 9x9 grid with digits from 1 to 9, ensuring each row, column, and 3x3 subgrid contains all numbers without duplicates. The game starts with some cells pre-filled, and players must deduce the correct numbers to complete the grid.
+
 > More games may be added in future updates.
 
 ## 🚀 Running Locally
