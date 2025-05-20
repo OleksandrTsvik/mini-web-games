@@ -63,7 +63,37 @@ export class Grid {
   }
 
   public changeCellValue(index: number, value: number): Grid {
-    this.cells[index].value = value;
+    const rowIndexes = this.getRowIndexes(index);
+    const columnIndexes = this.getColumnIndexes(index);
+    const boxIndexes = this.getBoxIndexes(index);
+
+    const activeIndexes = [...rowIndexes, ...columnIndexes, ...boxIndexes];
+
+    for (const i of activeIndexes) {
+      if (i === index) {
+        continue;
+      }
+
+      if (this.cells[i].value === value) {
+        this.cells[i].status = CellStatus.Wrong;
+      } else {
+        this.cells[i].status = CellStatus.Highlighted;
+      }
+    }
+
+    if (activeIndexes.every((i) => this.cells[i].value !== value)) {
+      this.cells[index].value = value;
+
+      this.cells.forEach((cell, i) => {
+        if (i === index) {
+          return;
+        } else if (cell.status === CellStatus.Same) {
+          cell.status = null;
+        } else if (cell.value === value) {
+          cell.status = CellStatus.Same;
+        }
+      });
+    }
 
     return this;
   }

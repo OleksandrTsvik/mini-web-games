@@ -1,7 +1,9 @@
 import { classnames } from '@/shared/lib/class-names';
-import { isNonNullable, isNone } from '@/shared/lib/type-guards';
+import { isNonNullable } from '@/shared/lib/type-guards';
 
 import { Cell, CellStatus } from '../game.types';
+
+import styles from './game.module.scss';
 
 type Props = {
   index: number;
@@ -10,22 +12,19 @@ type Props = {
 };
 
 const statusMap: Record<CellStatus, string> = {
-  [CellStatus.Selected]: 'bg-emerald-500',
-  [CellStatus.Highlighted]: 'bg-amber-500',
-  [CellStatus.Same]: 'bg-indigo-500',
-  [CellStatus.Wrong]: 'bg-red-500',
+  [CellStatus.Selected]: 'bg-lime-200 dark:bg-green-500/70',
+  [CellStatus.Highlighted]: 'bg-zinc-300 dark:bg-neutral-700',
+  [CellStatus.Same]: 'bg-sky-200 dark:bg-sky-800/80',
+  [CellStatus.Wrong]: 'bg-red-200 dark:bg-red-500/70',
 };
 
 export function GameCell({ index, cell, onClick }: Props) {
   return (
     <div
       className={classnames(
-        'flex items-center justify-center aspect-square rounded-sm select-none cursor-pointer',
-        {
-          'bg-slate-500': cell.isInit && isNone(cell.status),
-          'bg-slate-400': !cell.isInit && isNone(cell.status),
-        },
-        isNonNullable(cell.status) && statusMap[cell.status],
+        styles.grid__cell,
+        cell.isInit && 'text-gray-600 dark:text-gray-300',
+        isNonNullable(cell.status) ? statusMap[cell.status] : 'bg-neutral-100 dark:bg-neutral-600',
       )}
       onClick={() => onClick(index)}
     >

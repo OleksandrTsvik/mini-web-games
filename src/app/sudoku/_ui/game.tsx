@@ -10,6 +10,8 @@ import { useGameState } from '../_model/use-game-state';
 import { GameCell } from './game.cell';
 import { GameHeader } from './game.header';
 
+import styles from './game.module.scss';
+
 const lora = Lora({ weight: '400', subsets: ['latin'] });
 
 export function Game() {
@@ -23,9 +25,9 @@ export function Game() {
         <div
           ref={gridContainerRef}
           className={classnames(
+            styles.grid,
             'text-lg sm:text-2xl md:text-2xl lg:text-3xl',
-            'grid grid-cols-9 gap-1',
-            'w-full min-w-68 xs:max-w-6/7 sm:max-w-4/7 lg:max-w-3/7 mx-auto p-1 rounded-sm bg-slate-600',
+            'min-w-68 xs:max-w-6/7 sm:max-w-4/7 lg:max-w-3/7 border-black mx-auto',
             lora.className,
           )}
         >
