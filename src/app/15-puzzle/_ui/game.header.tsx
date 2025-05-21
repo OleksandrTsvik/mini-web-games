@@ -1,5 +1,5 @@
-import HeadingWithGameControls from '@/features/heading-with-game-controls';
-import Select, { OptionType } from '@/shared/ui/select';
+import { HeadingWithGameControls } from '@/features/heading-with-game-controls';
+import { OptionType, Select } from '@/shared/ui/select';
 
 import { GAME_SIZES } from '../game.constants';
 import { GameSize } from '../game.types';

@@ -4,7 +4,10 @@ type EventType = 'mousedown' | 'mouseup' | 'touchstart' | 'touchend' | 'focusin'
 
 const DEFAULT_EVENTS: EventType[] = ['mousedown', 'touchstart'];
 
-export function useClickOutside<T extends HTMLElement>(handler: () => void, events?: EventType[] | null) {
+export function useClickOutside<T extends HTMLElement = HTMLDivElement>(
+  handler: () => void,
+  events?: EventType[] | null,
+) {
   const ref = useRef<T>(null);
 
   const handlerRef = useRef(handler);

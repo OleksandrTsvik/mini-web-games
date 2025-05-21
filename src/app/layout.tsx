@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 
-import Footer from './_components/footer/footer';
-import Main from './_components/main/main';
-import Navbar from './_components/navbar/navbar';
-import Providers from './providers';
+import { Footer, Main, Navbar } from './_ui';
+import { Providers } from './providers';
 
 import '@/theme/globals.css';
 

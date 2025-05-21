@@ -2,7 +2,7 @@ type Props = {
   className?: string;
 };
 
-export default function KeyboardArrowsIcon({ className }: Props) {
+export function KeyboardArrowsIcon({ className }: Props) {
   return (
     <svg
       className={className}

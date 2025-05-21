@@ -1,7 +1,7 @@
 'use client';
 
 import { Check } from '@phosphor-icons/react/dist/ssr';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useClickOutside } from '@/hooks/use-click-outside';
 import { classnames } from '@/shared/lib/class-names';
@@ -21,7 +21,7 @@ type Props<ValueType> = {
   onChange?: (value: ValueType) => void;
 };
 
-export default function Select<ValueType>({ label, value, options, className, onChange }: Props<ValueType>) {
+export function Select<ValueType>({ label, value, options, className, onChange }: Props<ValueType>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(options?.find((option) => option.value === value));
 
@@ -29,7 +29,7 @@ export default function Select<ValueType>({ label, value, options, className, on
     setIsOpen(false);
   };
 
-  const ref = useClickOutside<HTMLDivElement>(handleClose);
+  const ref = useClickOutside(handleClose);
 
   const handleOpenToggle = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
@@ -43,6 +43,10 @@ export default function Select<ValueType>({ label, value, options, className, on
 
     handleClose();
   };
+
+  useEffect(() => {
+    setSelected(options?.find((option) => option.value === value));
+  }, [options, value]);
 
   return (
     <div

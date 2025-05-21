@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react';
 
-import useKeyboard from '@/hooks/use-keyboard';
+import { useKeyboard } from '@/hooks/use-keyboard';
 import { handleGameKeyboardAction } from '@/shared/lib/keyboard.utils';
 import { shuffle } from '@/shared/lib/random.utils';
 import { KeyboardEventCode } from '@/shared/types';

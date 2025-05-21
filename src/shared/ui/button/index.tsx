@@ -39,7 +39,7 @@ const colorMap: Record<Color, string> = {
   zinc: 'text-white bg-zinc-800 hover:bg-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-700/85',
 };
 
-export default function Button<T extends React.ElementType = 'button'>({
+export function Button<T extends React.ElementType = 'button'>({
   component = 'button',
   icon,
   variant = 'default',

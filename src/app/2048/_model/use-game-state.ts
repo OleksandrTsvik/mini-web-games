@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useReducer } from 'react';
 
-import useKeyboard from '@/hooks/use-keyboard';
-import useSwipe, { SwipeActions } from '@/hooks/use-swipe';
+import { useKeyboard } from '@/hooks/use-keyboard';
+import { SwipeActions, useSwipe } from '@/hooks/use-swipe';
 import { handleGameKeyboardAction } from '@/shared/lib/keyboard.utils';
 import { KeyboardEventCode } from '@/shared/types';
 

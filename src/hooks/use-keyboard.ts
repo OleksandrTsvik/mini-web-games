@@ -6,7 +6,7 @@ type KeyboardEventType = 'keydown' | 'keyup';
 
 const DEFAULT_EVENTS: KeyboardEventType[] = ['keydown'];
 
-export default function useKeyboard(handler: (key: KeyboardEventCode) => void, events?: KeyboardEventType[] | null) {
+export function useKeyboard(handler: (key: KeyboardEventCode) => void, events?: KeyboardEventType[] | null) {
   const handlerRef = useRef(handler);
   handlerRef.current = handler;
 

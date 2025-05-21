@@ -12,6 +12,8 @@ export const KEYBOARD_EVENT_CODE = {
   NUMPAD_2: 'Numpad2',
   NUMPAD_4: 'Numpad4',
   NUMPAD_6: 'Numpad6',
+  BACKSPACE: 'Backspace',
+  DELETE: 'Delete',
 } as const;
 
 export type KeyboardEventCode = (typeof KEYBOARD_EVENT_CODE)[keyof typeof KEYBOARD_EVENT_CODE];

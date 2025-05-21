@@ -1,4 +1,4 @@
-import './_components/loading/loading.css';
+import './_ui/loading/loading.css';
 
 export default function RootLoading() {
   return (
