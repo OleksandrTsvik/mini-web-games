@@ -1,4 +1,4 @@
-import { useLayoutEffect, useReducer } from 'react';
+import { useEffect, useLayoutEffect, useReducer } from 'react';
 
 import { useClickOutside } from '@/hooks/use-click-outside';
 import { useKeyboard } from '@/hooks/use-keyboard';
@@ -7,13 +7,22 @@ import { KEYBOARD_EVENT_CODE, KeyboardEventCode } from '@/shared/types';
 import { GameMove } from '../game.types';
 
 import { GAME_ACTIONS, gameReducer, initGameState } from './game-reducer';
+import { loadGameState, saveGameState } from './game-storage';
 
 export function useGameState() {
   const [{ difficulty, isWin, grid }, dispatch] = useReducer(gameReducer, {}, initGameState);
 
   useLayoutEffect(() => {
-    dispatch({ type: GAME_ACTIONS.INIT_GAME });
+    try {
+      dispatch({ type: GAME_ACTIONS.INIT_GAME, payload: loadGameState() });
+    } catch {
+      dispatch({ type: GAME_ACTIONS.INIT_GAME });
+    }
   }, []);
+
+  useEffect(() => {
+    saveGameState(difficulty, grid);
+  }, [difficulty, grid]);
 
   const handleKeyboardAction = (key: KeyboardEventCode) => {
     switch (key) {

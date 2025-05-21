@@ -1,7 +1,7 @@
 'use client';
 
 import { Check } from '@phosphor-icons/react/dist/ssr';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useClickOutside } from '@/hooks/use-click-outside';
 import { classnames } from '@/shared/lib/class-names';
@@ -43,6 +43,10 @@ export function Select<ValueType>({ label, value, options, className, onChange }
 
     handleClose();
   };
+
+  useEffect(() => {
+    setSelected(options?.find((option) => option.value === value));
+  }, [options, value]);
 
   return (
     <div
