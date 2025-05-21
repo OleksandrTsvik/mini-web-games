@@ -27,23 +27,33 @@ export function initGameState({ difficulty = DEFAULT_DIFFICULTY }: InitGameState
 
 export const enum GAME_ACTIONS {
   INIT_GAME,
+  CHANGE_DIFFICULTY,
   SELECT_CELL,
   CHANGE_CELL_VALUE,
   REMOVE_CELL_VALUE,
+  RESET,
   RESTART,
 }
 
 type GameAction =
   | { type: GAME_ACTIONS.INIT_GAME }
+  | { type: GAME_ACTIONS.CHANGE_DIFFICULTY; payload: number }
   | { type: GAME_ACTIONS.SELECT_CELL; payload?: { index?: number; move?: GameMove } }
   | { type: GAME_ACTIONS.CHANGE_CELL_VALUE; payload: number }
   | { type: GAME_ACTIONS.REMOVE_CELL_VALUE }
+  | { type: GAME_ACTIONS.RESET }
   | { type: GAME_ACTIONS.RESTART };
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case GAME_ACTIONS.INIT_GAME: {
       const difficulty = state.difficulty;
+      const grid = Grid.create(GRID_SIZE, difficulty);
+
+      return { ...state, difficulty, isWin: false, grid };
+    }
+    case GAME_ACTIONS.CHANGE_DIFFICULTY: {
+      const difficulty = action.payload;
       const grid = Grid.create(GRID_SIZE, difficulty);
 
       return { ...state, difficulty, isWin: false, grid };
@@ -77,6 +87,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       }
 
       return { ...state, grid: state.grid.clone().removeCellValue(state.selectedCellIndex!) };
+    }
+    case GAME_ACTIONS.RESET: {
+      return { ...state, isWin: false, grid: state.grid.clone().reset(), selectedCellIndex: null };
     }
     case GAME_ACTIONS.RESTART: {
       return { ...state, isWin: false, grid: Grid.create(state.grid.size, state.difficulty), selectedCellIndex: null };

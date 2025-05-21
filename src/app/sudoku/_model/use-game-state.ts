@@ -9,7 +9,7 @@ import { GameMove } from '../game.types';
 import { GAME_ACTIONS, gameReducer, initGameState } from './game-reducer';
 
 export function useGameState() {
-  const [{ isWin, grid }, dispatch] = useReducer(gameReducer, {}, initGameState);
+  const [{ difficulty, isWin, grid }, dispatch] = useReducer(gameReducer, {}, initGameState);
 
   useLayoutEffect(() => {
     dispatch({ type: GAME_ACTIONS.INIT_GAME });
@@ -55,7 +55,23 @@ export function useGameState() {
 
   const handleRemoveClick = () => dispatch({ type: GAME_ACTIONS.REMOVE_CELL_VALUE });
 
+  const handleReset = () => dispatch({ type: GAME_ACTIONS.RESET });
+
   const handleRestart = () => dispatch({ type: GAME_ACTIONS.RESTART });
 
-  return { isWin, grid, gridContainerRef, handleCellClick, handleNumberClick, handleRemoveClick, handleRestart };
+  const handleChangeDifficulty = (difficulty: number) =>
+    dispatch({ type: GAME_ACTIONS.CHANGE_DIFFICULTY, payload: difficulty });
+
+  return {
+    difficulty,
+    isWin,
+    grid,
+    gridContainerRef,
+    handleCellClick,
+    handleNumberClick,
+    handleRemoveClick,
+    handleReset,
+    handleRestart,
+    handleChangeDifficulty,
+  };
 }

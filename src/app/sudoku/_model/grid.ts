@@ -122,6 +122,18 @@ export class Grid {
     }
   }
 
+  public reset(): Grid {
+    for (const cell of this.cells) {
+      cell.status = null;
+
+      if (!cell.isInit) {
+        cell.value = null;
+      }
+    }
+
+    return this;
+  }
+
   public getRowIndexes(index: number): number[] {
     const start = Math.floor(index / this.size) * this.size;
     const stop = start + this.size - 1;

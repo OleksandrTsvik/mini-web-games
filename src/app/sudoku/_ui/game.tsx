@@ -17,12 +17,27 @@ import styles from './game.module.scss';
 const spaceMono = Space_Mono({ weight: '400', subsets: ['latin'] });
 
 export function Game() {
-  const { isWin, grid, gridContainerRef, handleCellClick, handleNumberClick, handleRemoveClick, handleRestart } =
-    useGameState();
+  const {
+    difficulty,
+    isWin,
+    grid,
+    gridContainerRef,
+    handleCellClick,
+    handleNumberClick,
+    handleRemoveClick,
+    handleReset,
+    handleRestart,
+    handleChangeDifficulty,
+  } = useGameState();
 
   return (
     <>
-      <GameHeader />
+      <GameHeader
+        difficulty={difficulty}
+        onChangeDifficulty={handleChangeDifficulty}
+        onReset={handleReset}
+        onRestart={handleRestart}
+      />
       <Divider />
       <div className="overflow-x-auto">
         <div
