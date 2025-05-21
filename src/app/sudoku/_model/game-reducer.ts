@@ -7,6 +7,7 @@ import { Grid } from './grid';
 
 type GameState = {
   difficulty: number;
+  isWin: boolean;
   grid: Grid;
   selectedCellIndex: number | null;
 };
@@ -18,6 +19,7 @@ type InitGameStateArgument = {
 export function initGameState({ difficulty = DEFAULT_DIFFICULTY }: InitGameStateArgument): GameState {
   return {
     difficulty,
+    isWin: false,
     grid: Grid.createEmpty(GRID_SIZE),
     selectedCellIndex: null,
   };
@@ -28,22 +30,25 @@ export const enum GAME_ACTIONS {
   SELECT_CELL,
   CHANGE_CELL_VALUE,
   REMOVE_CELL_VALUE,
+  RESTART,
 }
 
 type GameAction =
   | { type: GAME_ACTIONS.INIT_GAME }
   | { type: GAME_ACTIONS.SELECT_CELL; payload?: { index?: number; move?: GameMove } }
   | { type: GAME_ACTIONS.CHANGE_CELL_VALUE; payload: number }
-  | { type: GAME_ACTIONS.REMOVE_CELL_VALUE };
+  | { type: GAME_ACTIONS.REMOVE_CELL_VALUE }
+  | { type: GAME_ACTIONS.RESTART };
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
-    case GAME_ACTIONS.INIT_GAME:
+    case GAME_ACTIONS.INIT_GAME: {
       const difficulty = state.difficulty;
       const grid = Grid.create(GRID_SIZE, difficulty);
 
-      return { ...state, difficulty, grid };
-    case GAME_ACTIONS.SELECT_CELL:
+      return { ...state, difficulty, isWin: false, grid };
+    }
+    case GAME_ACTIONS.SELECT_CELL: {
       const selectedCellIndex = updateSelectedCellIndex(state, action.payload?.index, action.payload?.move);
 
       if (!canSelectCell(state, selectedCellIndex)) {
@@ -51,20 +56,34 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       }
 
       return { ...state, grid: state.grid.clone().selectCell(selectedCellIndex), selectedCellIndex };
-    case GAME_ACTIONS.CHANGE_CELL_VALUE:
+    }
+    case GAME_ACTIONS.CHANGE_CELL_VALUE: {
       if (!canChangeCellValue(state, action.payload)) {
         return state;
       }
 
-      return { ...state, grid: state.grid.clone().changeCellValue(state.selectedCellIndex!, action.payload) };
-    case GAME_ACTIONS.REMOVE_CELL_VALUE:
+      const grid = state.grid.clone().changeCellValue(state.selectedCellIndex!, action.payload);
+      const isWin = grid.isWin();
+
+      if (isWin) {
+        grid.applyVictoryStatus();
+      }
+
+      return { ...state, isWin, grid };
+    }
+    case GAME_ACTIONS.REMOVE_CELL_VALUE: {
       if (!canRemoveCellValue(state)) {
         return state;
       }
 
       return { ...state, grid: state.grid.clone().removeCellValue(state.selectedCellIndex!) };
-    default:
+    }
+    case GAME_ACTIONS.RESTART: {
+      return { ...state, isWin: false, grid: Grid.create(state.grid.size, state.difficulty), selectedCellIndex: null };
+    }
+    default: {
       return state;
+    }
   }
 }
 
@@ -94,7 +113,7 @@ function updateSelectedCellIndex(state: GameState, index?: number, move?: GameMo
 }
 
 function canSelectCell(state: GameState, index: number | null): boolean {
-  if (index === state.selectedCellIndex) {
+  if (state.isWin || index === state.selectedCellIndex) {
     return false;
   }
 
@@ -107,6 +126,7 @@ function canSelectCell(state: GameState, index: number | null): boolean {
 
 function canChangeCellValue(state: GameState, value: number): boolean {
   return (
+    !state.isWin &&
     SUDOKU_NUMBERS.includes(value) &&
     isNonNullable(state.selectedCellIndex) &&
     !state.grid.cells[state.selectedCellIndex].isInit &&
@@ -116,6 +136,7 @@ function canChangeCellValue(state: GameState, value: number): boolean {
 
 function canRemoveCellValue(state: GameState): boolean {
   return (
+    !state.isWin &&
     isNonNullable(state.selectedCellIndex) &&
     !state.grid.cells[state.selectedCellIndex].isInit &&
     isNonNullable(state.grid.cells[state.selectedCellIndex].value)

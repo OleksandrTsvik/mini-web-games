@@ -116,6 +116,12 @@ export class Grid {
     return this.cells.every((cell) => isNonNullable(cell.value));
   }
 
+  public applyVictoryStatus(): void {
+    for (const cell of this.cells) {
+      cell.status = CellStatus.Victory;
+    }
+  }
+
   public getRowIndexes(index: number): number[] {
     const start = Math.floor(index / this.size) * this.size;
     const stop = start + this.size - 1;

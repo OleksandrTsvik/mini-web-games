@@ -9,6 +9,7 @@ export const enum CellStatus {
   Highlighted,
   Same,
   Wrong,
+  Victory,
 }
 
 export const enum GameMove {

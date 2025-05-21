@@ -16,6 +16,7 @@ const statusMap: Record<CellStatus, string> = {
   [CellStatus.Highlighted]: 'bg-zinc-300 dark:bg-neutral-700',
   [CellStatus.Same]: 'bg-sky-200 dark:bg-sky-800/80',
   [CellStatus.Wrong]: 'bg-red-200 dark:bg-red-500/70',
+  [CellStatus.Victory]: 'bg-yellow-100 dark:bg-yellow-200/50',
 };
 
 export function GameCell({ index, cell, onClick }: Props) {
