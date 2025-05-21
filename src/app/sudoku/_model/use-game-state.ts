@@ -33,6 +33,10 @@ export function useGameState() {
       case KEYBOARD_EVENT_CODE.D:
         dispatch({ type: GAME_ACTIONS.SELECT_CELL, payload: { move: GameMove.RIGHT } });
         break;
+      case KEYBOARD_EVENT_CODE.BACKSPACE:
+      case KEYBOARD_EVENT_CODE.DELETE:
+        dispatch({ type: GAME_ACTIONS.REMOVE_CELL_VALUE });
+        break;
       default:
         dispatch({ type: GAME_ACTIONS.CHANGE_CELL_VALUE, payload: +key.replace(/\D+/, '') });
         break;
@@ -47,5 +51,9 @@ export function useGameState() {
 
   const handleCellClick = (index: number) => dispatch({ type: GAME_ACTIONS.SELECT_CELL, payload: { index } });
 
-  return { grid, gridContainerRef, handleCellClick };
+  const handleNumberClick = (number: number) => dispatch({ type: GAME_ACTIONS.CHANGE_CELL_VALUE, payload: number });
+
+  const handleRemoveClick = () => dispatch({ type: GAME_ACTIONS.REMOVE_CELL_VALUE });
+
+  return { grid, gridContainerRef, handleCellClick, handleNumberClick, handleRemoveClick };
 }

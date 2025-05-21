@@ -27,12 +27,14 @@ export const enum GAME_ACTIONS {
   INIT_GAME,
   SELECT_CELL,
   CHANGE_CELL_VALUE,
+  REMOVE_CELL_VALUE,
 }
 
 type GameAction =
   | { type: GAME_ACTIONS.INIT_GAME }
   | { type: GAME_ACTIONS.SELECT_CELL; payload?: { index?: number; move?: GameMove } }
-  | { type: GAME_ACTIONS.CHANGE_CELL_VALUE; payload: number };
+  | { type: GAME_ACTIONS.CHANGE_CELL_VALUE; payload: number }
+  | { type: GAME_ACTIONS.REMOVE_CELL_VALUE };
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
@@ -55,6 +57,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       }
 
       return { ...state, grid: state.grid.clone().changeCellValue(state.selectedCellIndex!, action.payload) };
+    case GAME_ACTIONS.REMOVE_CELL_VALUE:
+      if (!canRemoveCellValue(state)) {
+        return state;
+      }
+
+      return { ...state, grid: state.grid.clone().removeCellValue(state.selectedCellIndex!) };
     default:
       return state;
   }
@@ -103,5 +111,13 @@ function canChangeCellValue(state: GameState, value: number): boolean {
     isNonNullable(state.selectedCellIndex) &&
     !state.grid.cells[state.selectedCellIndex].isInit &&
     state.grid.cells[state.selectedCellIndex].value !== value
+  );
+}
+
+function canRemoveCellValue(state: GameState): boolean {
+  return (
+    isNonNullable(state.selectedCellIndex) &&
+    !state.grid.cells[state.selectedCellIndex].isInit &&
+    isNonNullable(state.grid.cells[state.selectedCellIndex].value)
   );
 }

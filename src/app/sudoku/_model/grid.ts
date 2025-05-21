@@ -98,6 +98,24 @@ export class Grid {
     return this;
   }
 
+  public removeCellValue(index: number): Grid {
+    for (let i = 0; i < this.cells.length; i++) {
+      if (this.cells[i].status === CellStatus.Wrong) {
+        this.cells[i].status = CellStatus.Highlighted;
+      } else if (this.cells[i].status === CellStatus.Same) {
+        this.cells[i].status = null;
+      }
+    }
+
+    this.cells[index].value = null;
+
+    return this;
+  }
+
+  public isWin(): boolean {
+    return this.cells.every((cell) => isNonNullable(cell.value));
+  }
+
   public getRowIndexes(index: number): number[] {
     const start = Math.floor(index / this.size) * this.size;
     const stop = start + this.size - 1;
